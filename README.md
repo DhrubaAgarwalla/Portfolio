@@ -1,4 +1,4 @@
-# 🚀 Stellar Code Lab - AI-Orchestrated Portfolio
+# 🚀 AI-Orchestrated Portfolio
 
 <div align="center">
 
@@ -7,7 +7,7 @@
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-**🌟 Live Demo**: [portfolio-dhruba.vercel.app](https://portfolio-dhruba.vercel.app/)
+**🌟 Website**: [portfolio-dhruba.vercel.app](https://portfolio-dhruba.vercel.app/)
 
 </div>
 

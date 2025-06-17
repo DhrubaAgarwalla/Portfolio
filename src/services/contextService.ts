@@ -1,5 +1,6 @@
 import { ProjectContext, ConversationContext, APIResponse } from '@/types/chatbot';
 import { githubService } from './githubService';
+import { knowledgeBase } from './knowledgeBase';
 
 class ContextService {
   private projectsCache: Map<string, ProjectContext> = new Map();
@@ -141,7 +142,13 @@ class ContextService {
   async buildContextForQuery(query: string, context: ConversationContext): Promise<string> {
     let contextString = '';
 
-    // Detect if query is about specific project
+    // First, get relevant context from knowledge base
+    const knowledgeContext = knowledgeBase.searchKnowledge(query);
+    if (knowledgeContext) {
+      contextString += `KNOWLEDGE BASE CONTEXT:\n${knowledgeContext}\n\n`;
+    }
+
+    // Detect if query is about specific project for GitHub data
     const projectKeywords = {
       'event manager': 'NITS-Event-Managment',
       'nit silchar': 'NITS-Event-Managment',
