@@ -191,7 +191,7 @@ Remember: Keep responses SHORT unless asked for details. You represent ${ownerNa
           model: this.model,
           messages: groqMessages,
           temperature: parseFloat(import.meta.env.VITE_RESPONSE_TEMPERATURE || '0.7'),
-          max_tokens: 300, // Reduced for shorter responses
+          max_tokens: 1500, // Increased for detailed responses
           top_p: 0.9,
           stream: false
         })
