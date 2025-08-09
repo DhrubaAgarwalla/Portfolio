@@ -1,8 +1,8 @@
 
 import { useState, useEffect, Suspense } from "react";
-import { motion } from "framer-motion";
-import { Hero } from "@/components/Hero";
-import { ParticleBackground } from "@/components/ParticleBackground";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { InteractiveHero } from "@/components/InteractiveHero";
+import { EnhancedParticleBackground } from "@/components/EnhancedParticleBackground";
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LoadingScreen } from "@/components/LoadingScreen";
@@ -114,6 +114,12 @@ const Index = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -148,9 +154,16 @@ const Index = () => {
           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)',
           backgroundAttachment: 'fixed'
         }}
+        data-scroll-container
       >
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-blue z-50"
+          style={{ scaleX, transformOrigin: "0%" }}
+        />
+
         <Navigation />
-        <ParticleBackground />
+        <EnhancedParticleBackground />
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -160,7 +173,7 @@ const Index = () => {
           style={{ backgroundColor: 'transparent' }}
         >
         <div id="home">
-          <Hero />
+          <InteractiveHero />
         </div>
 
         <Suspense fallback={<SectionFallback />}>
