@@ -72,18 +72,6 @@ export const TechStack = () => {
       ]
     },
     {
-      title: "Development Approach",
-      icon: <Zap className="w-6 h-6" />,
-      color: "cyber-pink",
-      technologies: [
-        { name: "AI-Driven Architecture", level: "Expert", description: "System design through AI" },
-        { name: "Rapid Prototyping", level: "Advanced", description: "Fast iteration cycles" },
-        { name: "Error Prevention", level: "Advanced", description: "Proactive debugging" },
-        { name: "Resource Optimization", level: "Expert", description: "Maximum impact, zero cost" },
-        { name: "Continuous Learning", level: "Expert", description: "Adapting to new technologies" }
-      ]
-    },
-    {
       title: "E-commerce & Automation",
       icon: <Code className="w-6 h-6" />,
       color: "cyber-orange", 
@@ -178,7 +166,7 @@ export const TechStack = () => {
                 className="overflow-hidden"
               >
                 <div className="px-4 pb-4 space-y-2">
-                  {category.technologies.slice(0, 3).map((tech, techIndex) => (
+                  {category.technologies.map((tech, techIndex) => (
                     <div key={tech.name} className="flex items-center justify-between py-1">
                       <span className="text-sm text-white">{tech.name}</span>
                       <span className={`text-xs ${getLevelColor(tech.level)}`}>
@@ -186,11 +174,6 @@ export const TechStack = () => {
                       </span>
                     </div>
                   ))}
-                  {category.technologies.length > 3 && (
-                    <div className="text-xs text-gray-400 pt-1">
-                      +{category.technologies.length - 3} more technologies
-                    </div>
-                  )}
                 </div>
               </motion.div>
             </motion.div>
