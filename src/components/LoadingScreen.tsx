@@ -31,7 +31,7 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
     ];
 
     const imagePromises = assetsToPreload.map(src => {
-      return new Promise((resolve, reject) => {
+      return new Promise<string>((resolve) => {
         if (src.endsWith('.pdf')) {
           // For PDFs, just check if they exist
           fetch(src, { method: 'HEAD' })

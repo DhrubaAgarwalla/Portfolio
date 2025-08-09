@@ -21,6 +21,7 @@ export const TechStack = () => {
       color: "cyber-green",
       technologies: [
         { name: "Node.js", level: "Advanced", description: "AI-orchestrated server-side development" },
+        { name: "Supabase", level: "Advanced", description: "Real-time database & authentication" },
         { name: "Firebase", level: "Advanced", description: "AI-assisted real-time database & auth" },
         { name: "Google Sheets API", level: "Intermediate", description: "AI-guided data integration" },
         { name: "GitHub API", level: "Intermediate", description: "AI-powered repository analysis" },
@@ -40,15 +41,28 @@ export const TechStack = () => {
       ]
     },
     {
-      title: "Tools & Platforms",
+      title: "Payment & E-commerce",
       icon: <Cloud className="w-6 h-6" />,
       color: "cyber-yellow",
+      technologies: [
+        { name: "Cashfree Payment", level: "Advanced", description: "UPI, cards & net banking integration" },
+        { name: "Delivery APIs", level: "Advanced", description: "Delhivery, Shiprocket, Blue Dart, DTDC" },
+        { name: "Google Generative AI", level: "Advanced", description: "AI-generated product reviews" },
+        { name: "Webhook Integration", level: "Intermediate", description: "Real-time order processing" },
+        { name: "CORS & Security", level: "Advanced", description: "Production-ready security" }
+      ]
+    },
+    {
+      title: "Tools & Platforms", 
+      icon: <Cloud className="w-6 h-6" />,
+      color: "cyber-cyan",
       technologies: [
         { name: "Vercel", level: "Advanced", description: "Deployment & hosting" },
         { name: "Cloudinary", level: "Intermediate", description: "Media management" },
         { name: "VS Code + AI", level: "Expert", description: "AI-enhanced development" },
         { name: "Git & GitHub", level: "Advanced", description: "Version control" },
-        { name: "Recharts", level: "Intermediate", description: "Data visualization" }
+        { name: "Recharts", level: "Intermediate", description: "Data visualization" },
+        { name: "shadcn/ui", level: "Advanced", description: "Component library" }
       ]
     },
     {
@@ -64,13 +78,14 @@ export const TechStack = () => {
       ]
     },
     {
-      title: "Specialized Skills",
+      title: "E-commerce & Automation",
       icon: <Code className="w-6 h-6" />,
-      color: "cyber-orange",
+      color: "cyber-orange", 
       technologies: [
         { name: "QR Code Systems", level: "Advanced", description: "Attendance tracking" },
-        { name: "Email Automation", level: "Intermediate", description: "Gmail API integration" },
-        { name: "Data Pipelines", level: "Intermediate", description: "Real-time processing" },
+        { name: "Email Automation", level: "Advanced", description: "Multi-provider email integration" },
+        { name: "Inventory Management", level: "Advanced", description: "Real-time stock tracking" },
+        { name: "Order Processing", level: "Advanced", description: "Automated fulfillment pipelines" },
         { name: "Role-Based Access", level: "Advanced", description: "Security implementation" },
         { name: "Performance Optimization", level: "Intermediate", description: "Speed & efficiency" }
       ]
