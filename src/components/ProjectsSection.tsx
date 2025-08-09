@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { InteractiveProjectCard } from "./InteractiveProjectCard";
+import { ProjectCard } from "./ProjectCard";
 import { Project } from "@/pages/Index";
 
 interface ProjectsSectionProps {
@@ -37,7 +37,7 @@ export const ProjectsSection = ({ projects, onProjectClick }: ProjectsSectionPro
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
             >
-              <InteractiveProjectCard
+              <ProjectCard
                 project={project}
                 onClick={() => onProjectClick(project)}
                 index={index}
