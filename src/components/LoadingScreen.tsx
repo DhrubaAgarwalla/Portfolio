@@ -245,7 +245,7 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           className="grid grid-cols-3 gap-2 sm:gap-4 text-center"
         >
           <div className="glass-card p-2 sm:p-3">
-            <div className="text-sm sm:text-base md:text-lg font-bold text-cyber-blue">140K+</div>
+            <div className="text-sm sm:text-base md:text-lg font-bold text-cyber-blue">155K+</div>
             <div className="text-xs text-gray-400">Lines of Code</div>
           </div>
           <div className="glass-card p-2 sm:p-3">

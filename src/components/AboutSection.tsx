@@ -5,7 +5,7 @@ export const AboutSection = () => {
   const achievements = [
     {
       icon: <Code className="w-6 h-6" />,
-      title: "115,000+ Lines",
+      title: "155,000+ Lines",
       description: "AI-orchestrated code across two major projects",
       color: "cyber-blue"
     },

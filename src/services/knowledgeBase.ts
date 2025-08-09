@@ -97,8 +97,9 @@ class KnowledgeBase {
     philosophy: "Creating large-scale, production-ready applications through strategic AI collaboration and prompt engineering, without traditional coding knowledge. Combining AI/ML with web development to build exceptional user experiences.",
     achievements: [
       "2nd Prize Winner in CSS Hacks Hackathon",
-      "Built Event Manager (75,000+ lines) through AI orchestration",
-      "Developed GitIQ (40,000+ lines) using AI-driven development",
+      "Built 155,000+ total lines across all projects through AI orchestration",
+      "Event Manager (75,000+ lines) - enterprise event management platform",
+      "GitIQ (40,000+ lines) - AI-powered repository analysis tool",
       "Created advanced portfolio with AI chatbot integration",
       "Specialized in rapid development through AI collaboration",
       "Expert in bypassing platform restrictions for automation systems"
@@ -456,8 +457,9 @@ class KnowledgeBase {
       "AI-powered debugging and optimization"
     ],
     examples: [
-      "Event Manager: 75,000+ lines built through AI orchestration",
-      "GitIQ: 40,000+ lines developed using AI-driven approach",
+      "Total 155,000+ lines across all projects through AI orchestration",
+      "Event Manager: 75,000+ lines - enterprise event management platform",
+      "GitIQ: 40,000+ lines - AI-powered repository analysis tool",
       "Multiple automation systems created in days rather than months",
       "Portfolio website with advanced AI chatbot integration"
     ]
@@ -681,7 +683,7 @@ ${augment.contextEngine.slice(0, 5).map(capability => `• ${capability}`).join(
 GENERAL OVERVIEW:
 ${this.personalProfile.name} is an ${this.personalProfile.title} and ${this.personalProfile.education.branch} student at ${this.personalProfile.education.institution}.
 
-Specializes in building large-scale applications through AI orchestration using Augment Code IDE plugin with Claude Sonnet 4, with major projects including:
+Specializes in building large-scale applications through AI orchestration (155,000+ total lines) using Augment Code IDE plugin with Claude Sonnet 4, with major projects including:
 • Event Manager (75,000+ lines) - Event management platform for NIT Silchar
 • GitIQ (40,000+ lines) - AI-powered GitHub repository insights tool
 • Portfolio Website (15,000+ lines) - This website with AI chatbot integration

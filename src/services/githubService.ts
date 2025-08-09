@@ -52,13 +52,13 @@ class GitHubService {
       const commitCount = await this.getCommitCount(repoName);
 
       const stats: GitHubStats = {
-        stars: repo.stargazers_count,
-        forks: repo.forks_count,
+        stars: (repo as any).stargazers_count || 0,
+        forks: (repo as any).forks_count || 0,
         commits: commitCount,
         contributors: await this.getContributorCount(repoName),
-        languages: languages,
-        lastUpdated: repo.updated_at,
-        issues: repo.open_issues_count,
+        languages: (languages as any) || {},
+        lastUpdated: (repo as any).updated_at || '',
+        issues: (repo as any).open_issues_count || 0,
         pullRequests: await this.getPullRequestCount(repoName)
       };
 
@@ -80,7 +80,7 @@ class GitHubService {
       }
 
       // Decode base64 content
-      const content = atob(response.data.content.replace(/\n/g, ''));
+      const content = atob((response.data as any).content.replace(/\n/g, ''));
       return { success: true, data: content };
     } catch (error) {
       return {
@@ -121,7 +121,7 @@ class GitHubService {
   private async getContributorCount(repoName: string): Promise<number> {
     try {
       const response = await this.makeRequest(`/repos/${this.username}/${repoName}/contributors`);
-      return response.success ? response.data.length : 0;
+      return response.success ? (response.data as any[]).length : 0;
     } catch {
       return 0;
     }
@@ -172,7 +172,7 @@ class GitHubService {
         `/search/code?q=${encodeURIComponent(query)}+repo:${this.username}/${repoName}`
       );
 
-      return response;
+      return response as APIResponse<any[]>;
     } catch (error) {
       return {
         success: false,
