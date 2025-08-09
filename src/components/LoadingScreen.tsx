@@ -30,18 +30,17 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       // Add any other critical assets here
     ];
 
-    const imagePromises = assetsToPreload.map(src => {
+    const imagePromises = assetsToPreload.map((src) => {
       return new Promise<string>((resolve) => {
         if (src.endsWith('.pdf')) {
-          // For PDFs, just check if they exist
           fetch(src, { method: 'HEAD' })
             .then(() => resolve(src))
-            .catch(() => resolve(src)); // Don't fail loading for missing PDFs
+            .catch(() => resolve(src));
         } else {
-          const img = new Image();
-          img.onload = () => resolve(src);
-          img.onerror = () => resolve(src); // Don't fail loading for missing images
-          img.src = src;
+          const image = document.createElement('img');
+          image.onload = () => resolve(src);
+          image.onerror = () => resolve(src);
+          image.src = src;
         }
       });
     });

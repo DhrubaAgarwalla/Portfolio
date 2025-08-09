@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
-import { Code, Database, Cloud, Cpu, Palette, Zap } from "lucide-react";
+import { useState } from "react";
+import { Code, Database, Cloud, Cpu, Palette, Zap, ChevronDown, ChevronUp } from "lucide-react";
 
 export const TechStack = () => {
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(0);
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategory(expandedCategory === index ? null : index);
+  };
   const categories = [
     {
       title: "AI-Assisted Frontend Development",
@@ -111,26 +117,88 @@ export const TechStack = () => {
   };
 
   return (
-    <section className="py-8 sm:py-12 md:py-20 relative">
-      <div className="container mx-auto px-6">
+    <section id="tech" className="py-8 sm:py-12 md:py-20 relative">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-orbitron font-bold mb-6 text-cyber">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-orbitron font-bold mb-4 md:mb-6 text-cyber">
             Technology Arsenal
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A comprehensive toolkit mastered through AI collaboration and strategic learning
+          <p className="text-sm sm:text-base md:text-xl text-gray-300 max-w-3xl mx-auto">
+            A comprehensive toolkit mastered through AI collaboration
           </p>
         </motion.div>
 
-        {/* Tech Categories Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 tech-grid">
+        {/* Mobile: Accordion Style */}
+        <div className="block md:hidden space-y-3">
+          {categories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              className="glass-card overflow-hidden"
+            >
+              {/* Accordion Header */}
+              <button
+                onClick={() => toggleCategory(categoryIndex)}
+                className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-full bg-${category.color}/20 text-${category.color}`}>
+                    {category.icon}
+                  </div>
+                  <h3 className="text-sm font-orbitron font-bold text-white text-left">
+                    {category.title}
+                  </h3>
+                </div>
+                <motion.div
+                  animate={{ rotate: expandedCategory === categoryIndex ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-5 h-5 text-gray-400" />
+                </motion.div>
+              </button>
+
+              {/* Accordion Content */}
+              <motion.div
+                initial={false}
+                animate={{
+                  height: expandedCategory === categoryIndex ? "auto" : 0,
+                  opacity: expandedCategory === categoryIndex ? 1 : 0
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="px-4 pb-4 space-y-2">
+                  {category.technologies.slice(0, 3).map((tech, techIndex) => (
+                    <div key={tech.name} className="flex items-center justify-between py-1">
+                      <span className="text-sm text-white">{tech.name}</span>
+                      <span className={`text-xs ${getLevelColor(tech.level)}`}>
+                        {tech.level}
+                      </span>
+                    </div>
+                  ))}
+                  {category.technologies.length > 3 && (
+                    <div className="text-xs text-gray-400 pt-1">
+                      +{category.technologies.length - 3} more technologies
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop: Full Grid */}
+        <div className="hidden md:grid lg:grid-cols-2 gap-8 tech-grid">
           {categories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
