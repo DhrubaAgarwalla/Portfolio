@@ -195,8 +195,8 @@ class KnowledgeBase {
         "Deployed on Vercel with Supabase backend for scalability"
       ],
       impact: "Created a production-ready e-commerce platform demonstrating enterprise-level development capabilities. Showcases expertise in payment integration, logistics APIs, AI integration, and full-stack development with modern technologies.",
-      githubUrl: "https://github.com/DhrubaAgarwalla/RakhiMart",
-      demoUrl: "https://rakhimart.vercel.app/",
+      githubUrl: "https://github.com/DhrubaAgarwalla/Rakhi-Final",
+      demoUrl: "https://rakhi-final.vercel.app/",
       status: 'completed',
       developmentTime: "4-5 weeks"
     },

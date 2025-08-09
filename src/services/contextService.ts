@@ -15,8 +15,8 @@ class ContextService {
       description: '25,000+ lines comprehensive e-commerce platform for Rakhi sales with advanced integrations',
       technologies: ['React', 'TypeScript', 'Supabase', 'Cashfree', 'Tailwind CSS', 'AI Reviews', 'Multi-Delivery Partners'],
       lines: 25000,
-      githubUrl: 'https://github.com/DhrubaAgarwalla/RakhiMart',
-      demoUrl: 'https://rakhimart.vercel.app/',
+      githubUrl: 'https://github.com/DhrubaAgarwalla/Rakhi-Final',
+      demoUrl: 'https://rakhi-final.vercel.app/',
       highlights: [
         '25,000+ lines of production-ready e-commerce code',
         'Cashfree payment integration with UPI support',

@@ -90,7 +90,7 @@ A revolutionary portfolio showcasing the future of AI-driven development through
 - **🔒 Production Security**: Webhook validation and CORS protection
 - **📧 Email Integration**: Multi-provider support (SendGrid, Mailgun, SES, Postmark)
 
-**🔗 Links**: [GitHub](https://github.com/DhrubaAgarwalla/RakhiMart) | [Live Demo](https://rakhimart.vercel.app/)
+**🔗 Links**: [GitHub](https://github.com/DhrubaAgarwalla/Rakhi-Final) | [Live Demo](https://rakhi-final.vercel.app/)
 
 </details>
 

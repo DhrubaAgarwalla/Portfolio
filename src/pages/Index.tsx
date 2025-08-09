@@ -40,8 +40,8 @@ const projects: Project[] = [
     description: "Production-ready e-commerce platform with advanced payment integration and multi-delivery partner support",
     longDescription: "A comprehensive e-commerce platform built for Rakhi sales featuring Cashfree payment integration, multi-delivery partner support (Delhivery, Shiprocket, Blue Dart, DTDC), and advanced admin dashboard. Built with React, TypeScript, and Supabase, this production-ready platform includes real-time order tracking, inventory management, AI-generated reviews, and automated email workflows. Demonstrates enterprise-level e-commerce development with security hardening and performance optimization.",
     technologies: ["React", "TypeScript", "Supabase", "Cashfree Payment", "Tailwind CSS", "Google Generative AI", "Recharts", "shadcn/ui"],
-    demoUrl: "https://rakhimart.vercel.app/",
-    githubUrl: "https://github.com/DhrubaAgarwalla/RakhiMart",
+    demoUrl: "https://rakhi-final.vercel.app/",
+    githubUrl: "https://github.com/DhrubaAgarwalla/Rakhi-Final",
     imageUrl: "/rakhimart.png",
     highlights: [
       "Full-stack e-commerce platform with production deployment",
