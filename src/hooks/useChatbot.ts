@@ -20,7 +20,13 @@ export const useChatbot = () => {
     messages: [],
     context: {
       userIntent: 'general',
-      previousQuestions: []
+      previousQuestions: [],
+      discussedTopics: [],
+      conversationFlow: {
+        messageCount: 0,
+        lastInteractionTime: new Date(),
+        conversationDepth: 'surface'
+      }
     },
     isTyping: false
   });
@@ -157,26 +163,48 @@ export const useChatbot = () => {
 
     // Add user message
     addMessage(content, 'user');
-    
+
     setState(prev => ({ ...prev, isLoading: true, isTyping: true }));
 
     try {
-      // Analyze user intent
+      // Analyze user intent and conversation context
       const intent = await groqService.analyzeUserIntent(content);
-      
-      // Update context
+      const currentTopic = await groqService.extractTopic(content);
+
+      // Enhanced context building with conversation memory
       const newContext: ConversationContext = {
         ...state.context,
         userIntent: intent,
-        previousQuestions: [...state.context.previousQuestions, content].slice(-5) // Keep last 5 questions
+        previousQuestions: [...state.context.previousQuestions, content].slice(-10), // Keep last 10 questions
+        currentTopic,
+        discussedTopics: [...new Set([...state.context.discussedTopics, currentTopic])].slice(-15), // Keep last 15 topics
+        followUpContext: {
+          lastQuestion: content,
+          lastAnswer: state.messages.filter(m => m.role === 'assistant').pop()?.content || '',
+          relatedTopics: state.context.discussedTopics.filter(topic =>
+            content.toLowerCase().includes(topic.toLowerCase()) ||
+            topic.toLowerCase().includes(content.toLowerCase())
+          )
+        },
+        conversationFlow: {
+          messageCount: state.messages.length + 1,
+          lastInteractionTime: new Date(),
+          conversationDepth: state.messages.length > 10 ? 'deep' : state.messages.length > 5 ? 'detailed' : 'surface'
+        }
       };
+
+      // Generate conversation summary for long conversations
+      if (state.messages.length > 20 && !newContext.conversationSummary) {
+        const summary = await groqService.generateConversationSummary(state.messages.slice(0, -10));
+        newContext.conversationSummary = summary;
+      }
 
       updateContext(newContext);
 
-      // Build context for the query
+      // Build enhanced context for the query
       const additionalContext = await contextService.buildContextForQuery(content, newContext);
 
-      // Generate response
+      // Generate response with enhanced conversation context
       const response = await groqService.generateResponse(
         [...state.messages, { id: generateMessageId(), content, role: 'user', timestamp: new Date() }],
         newContext,
@@ -249,7 +277,13 @@ export const useChatbot = () => {
       messages: [],
       context: {
         userIntent: 'general',
-        previousQuestions: []
+        previousQuestions: [],
+        discussedTopics: [],
+        conversationFlow: {
+          messageCount: 0,
+          lastInteractionTime: new Date(),
+          conversationDepth: 'surface'
+        }
       }
     }));
 
@@ -285,19 +319,19 @@ export const useChatbot = () => {
     messages: state.messages,
     context: state.context,
     error: state.error,
-    
+
     // Actions
     sendMessage,
     toggleChat,
     clearChat,
     closeChat,
     sendSuggestedQuestion,
-    
+
     // Utilities
     quickQuestions,
     messageCount: state.messages.length,
     lastMessage: state.messages[state.messages.length - 1],
-    
+
     // Suggested questions from last response
     suggestedQuestions: (state as any).suggestedQuestions || []
   };

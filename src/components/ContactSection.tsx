@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, MapPin, Github, Linkedin, ExternalLink, MessageCircle } from "lucide-react";
+import { Mail, MessageSquare, MapPin, Github, Linkedin, ExternalLink, MessageCircle, Download } from "lucide-react";
 
 export const ContactSection = () => {
   const contactInfo = [
@@ -32,7 +32,7 @@ export const ContactSection = () => {
       label: "GitHub",
       href: "https://github.com/DhrubaAgarwalla",
       color: "cyber-blue",
-      description: "115,000+ lines of AI-orchestrated code"
+      description: "155,000+ lines of AI-orchestrated code"
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
@@ -40,6 +40,14 @@ export const ContactSection = () => {
       href: "https://www.linkedin.com/in/dhruba-kumar-agarwalla-7a5346270/",
       color: "cyber-green",
       description: "Professional network & opportunities"
+    },
+    {
+      icon: <Download className="w-6 h-6" />,
+      label: "Resume",
+      href: "/Resume.pdf",
+      color: "cyber-purple",
+      description: "Download my professional resume",
+      download: true
     }
   ];
 
@@ -133,8 +141,9 @@ export const ContactSection = () => {
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  target="_blank"
+                  target={social.label === "Resume" ? "_blank" : "_blank"}
                   rel="noopener noreferrer"
+                  download={social.download ? social.label : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -149,7 +158,11 @@ export const ContactSection = () => {
                     <div className="text-white font-medium">{social.label}</div>
                     <div className="text-sm text-gray-400">{social.description}</div>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {social.download ? (
+                    <Download className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  ) : (
+                    <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  )}
                 </motion.a>
               ))}
             </div>
@@ -207,8 +220,8 @@ export const ContactSection = () => {
           className="text-center mt-16 pt-8 border-t border-white/10"
         >
           <p className="text-gray-400">
-            <span className="text-cyber-blue font-medium">Dhruba Kumar Agarwalla</span> • 
-            AI-Orchestrated Full-Stack Developer • 
+            <span className="text-cyber-blue font-medium">Dhruba Kumar Agarwalla</span> •
+            AI-Orchestrated Full-Stack Developer •
             <span className="text-cyber-green">Building the Future, One AI Collaboration at a Time</span>
           </p>
         </motion.div>

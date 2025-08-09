@@ -3,7 +3,7 @@
 <div align="center">
 
 ![Portfolio Banner](https://img.shields.io/badge/Portfolio-AI--Orchestrated-blue?style=for-the-badge&logo=react)
-![Lines of Code](https://img.shields.io/badge/Lines%20of%20Code-130K+-green?style=for-the-badge)
+![Lines of Code](https://img.shields.io/badge/Lines%20of%20Code-155K+-green?style=for-the-badge)
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
@@ -16,12 +16,12 @@
 **Dhruba Kumar Agarwalla** - AI-Orchestrated Full-Stack Developer
 *2nd Year Civil Engineering Student at NIT Silchar*
 
-A revolutionary portfolio showcasing the future of AI-driven development through **130,000+ lines** of production-ready code built with strategic AI collaboration and **$0 budget**.
+A revolutionary portfolio showcasing the future of AI-driven development through **155,000+ lines** of production-ready code built with strategic AI collaboration and **$0 budget**.
 
 ### ✨ Portfolio Highlights
 
 - **🤖 AI-Orchestrated Development**: Pioneering human-AI collaboration methodology
-- **💰 Zero Budget, Maximum Impact**: 130,000+ lines of code with $0 investment
+- **💰 Zero Budget, Maximum Impact**: 155,000+ lines of code with $0 investment
 - **🏆 Award-Winning Developer**: 2nd place CSS Hacks Hackathon winner
 - **⚡ Ultra-Fast Development**: 75K lines in 3-4 weeks, 40K lines in <1 week
 - **🎯 Real-World Impact**: Projects deployed and actively used at NIT Silchar
@@ -74,6 +74,25 @@ A revolutionary portfolio showcasing the future of AI-driven development through
 | **📞 Contact** | Professional contact information and collaboration opportunities |
 
 ## 🚀 Featured Projects
+
+### 🛒 **RakhiMart - E-commerce Platform**
+*25,000+ lines | React + TypeScript + Supabase*
+
+<details>
+<summary><strong>📊 Project Highlights</strong></summary>
+
+- **🏪 Full E-commerce Platform**: Complete online marketplace for Rakhi sales
+- **💳 Payment Integration**: Cashfree with UPI, cards, and net banking support
+- **🚚 Multi-Delivery Partners**: Delhivery, Shiprocket, Blue Dart, DTDC integration
+- **🤖 AI-Generated Reviews**: Google Generative AI for product reviews
+- **📊 Admin Dashboard**: Comprehensive order and inventory management
+- **⚡ Real-time Features**: Live order tracking and stock management
+- **🔒 Production Security**: Webhook validation and CORS protection
+- **📧 Email Integration**: Multi-provider support (SendGrid, Mailgun, SES, Postmark)
+
+**🔗 Links**: [GitHub](https://github.com/DhrubaAgarwalla/RakhiMart) | [Live Demo](https://rakhimart.vercel.app/)
+
+</details>
 
 ### 🎯 **NIT Silchar Event Manager**
 *75,000+ lines | React + Node.js + Firebase*

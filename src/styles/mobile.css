@@ -28,11 +28,10 @@ body {
 @media (max-width: 768px) {
   /* Prevent overlapping with navigation */
   section:first-of-type {
-    padding-top: 4rem !important; /* Reduced from 5rem */
-    min-height: 85vh !important; /* Reduced height to create better spacing */
+    padding-top: 5rem !important; /* Reduced gap from header */
+    min-height: 75vh !important; /* Reduced height to create better spacing */
     /* Move hero content lower on mobile */
     align-items: flex-start !important;
-    padding-top: 8rem !important; /* Increased to push content lower */
   }
 
   /* Hero Section Mobile */
@@ -43,7 +42,7 @@ body {
 
   /* Move hero content to middle-lower position on mobile */
   section:first-of-type .container {
-    margin-top: 15vh !important; /* Push content down from top */
+    margin-top: 8vh !important; /* Reduced gap from header */
   }
 
   /* Projects section mobile spacing fix */
@@ -166,73 +165,102 @@ body {
 
   /* Specific spacing for projects section title */
   #projects h2 {
-    margin-bottom: 2rem !important; /* Reduced from default */
+    margin-bottom: 1.5rem !important; /* Reduced from default */
+    font-size: 2rem !important; /* Mobile-optimized title size */
+    line-height: 1.1 !important;
   }
 
   #projects .text-center.mb-16 {
     margin-bottom: 2rem !important; /* Reduced from mb-16 */
   }
 
+  /* Projects section description mobile optimization */
+  #projects p {
+    font-size: 0.875rem !important; /* Readable mobile description */
+    line-height: 1.4 !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0 1rem !important; /* Add side padding */
+  }
+
   .projects-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.5rem;
+    gap: 1.25rem;
     max-width: 100% !important;
+    padding: 0 0.5rem;
+  }
+
+  /* Projects section mobile grid optimization */
+  #projects .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
   }
 
   .project-card {
-    padding: 0.75rem !important; /* Much more compact card padding */
+    padding: 1rem !important; /* Balanced compact padding */
     margin: 0;
   }
 
-  /* Make project card content VERY compact for mobile */
+  /* Optimize project card content for mobile readability */
   .project-card .flex.justify-between.items-start {
-    margin-bottom: 0.5rem !important; /* Much smaller spacing */
+    margin-bottom: 0.75rem !important; /* Balanced spacing */
   }
 
   .project-card h3 {
-    font-size: 1rem !important; /* Much smaller title */
-    line-height: 1.1 !important;
+    font-size: 1.125rem !important; /* Readable title size */
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
   }
 
   .project-card p {
-    font-size: 0.75rem !important; /* Much smaller description text */
-    line-height: 1.3 !important;
-    margin-bottom: 0.5rem !important; /* Much tighter spacing */
+    font-size: 0.875rem !important; /* Readable description text */
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important; /* Balanced spacing */
   }
 
-  /* Technology tags very compact */
+  /* Technology tags optimized for mobile */
   .project-card .flex.flex-wrap {
-    gap: 0.25rem !important; /* Minimal gap between tech tags */
-    margin-bottom: 0.5rem !important; /* Much tighter spacing */
+    gap: 0.375rem !important; /* Readable gap between tech tags */
+    margin-bottom: 0.75rem !important; /* Balanced spacing */
   }
 
   .project-card .flex.flex-wrap span {
-    padding: 0.125rem 0.375rem !important; /* Very compact padding */
-    font-size: 0.625rem !important; /* Much smaller tech tag text */
+    padding: 0.25rem 0.5rem !important; /* Touch-friendly padding */
+    font-size: 0.75rem !important; /* Readable tech tag text */
+    white-space: nowrap !important; /* Prevent text wrapping */
   }
 
-  /* Buttons very compact */
+  /* Buttons optimized for mobile touch */
   .project-card .flex.gap-3 {
-    gap: 0.375rem !important; /* Minimal button gap */
+    gap: 0.75rem !important; /* Touch-friendly button gap */
   }
 
   .project-card .flex.gap-3 button {
-    font-size: 0.625rem !important; /* Much smaller button text */
+    font-size: 0.875rem !important; /* Readable button text */
+    padding: 0.5rem !important; /* Touch-friendly padding */
+    min-height: 44px !important; /* Touch target size */
   }
 
   .project-card .flex.gap-3 button svg {
-    width: 0.75rem !important; /* Much smaller icons */
-    height: 0.75rem !important;
+    width: 1rem !important; /* Readable icons */
+    height: 1rem !important;
   }
 
-  /* Reduce arrow icon size */
+  /* Optimize arrow icon for mobile */
   .project-card .p-2.rounded-full {
-    padding: 0.375rem !important; /* Smaller arrow container */
+    padding: 0.5rem !important; /* Touch-friendly arrow container */
+    min-height: 44px !important; /* Touch target size */
+    min-width: 44px !important;
   }
 
   .project-card .p-2.rounded-full svg {
-    width: 0.75rem !important; /* Smaller arrow icon */
-    height: 0.75rem !important;
+    width: 1rem !important; /* Readable arrow icon */
+    height: 1rem !important;
+  }
+
+  /* Project image optimization for mobile */
+  .project-card img {
+    height: 8rem !important; /* Consistent mobile image height */
+    object-fit: cover !important;
   }
 
   .project-title {
@@ -485,14 +513,14 @@ body {
 @media (max-width: 480px) {
   /* Further reduce hero section height on very small screens */
   section:first-of-type {
-    padding-top: 6rem !important; /* Adjusted to maintain lower positioning */
-    min-height: 80vh !important; /* Smaller height */
+    padding-top: 4.5rem !important; /* Reduced gap from header */
+    min-height: 70vh !important; /* Smaller height */
     align-items: flex-start !important;
   }
 
   /* Adjust container positioning for smaller screens */
   section:first-of-type .container {
-    margin-top: 12vh !important; /* Slightly less margin for smaller screens */
+    margin-top: 6vh !important; /* Reduced margin for smaller screens */
   }
 
   /* Tighter spacing for projects section */
@@ -527,56 +555,66 @@ body {
   }
 
   .project-card {
-    padding: 0.5rem !important; /* Ultra compact card padding */
+    padding: 0.875rem !important; /* Compact but readable card padding */
   }
 
-  /* ULTRA compact project card content for very small screens */
+  /* Compact project card content for very small screens */
   .project-card .flex.justify-between.items-start {
-    margin-bottom: 0.25rem !important; /* Ultra minimal spacing */
+    margin-bottom: 0.5rem !important; /* Minimal but readable spacing */
   }
 
   .project-card h3 {
-    font-size: 0.875rem !important; /* Ultra small title */
-    line-height: 1.0 !important;
+    font-size: 1rem !important; /* Readable title on small screens */
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
   }
 
   .project-card p {
-    font-size: 0.625rem !important; /* Ultra small description */
-    line-height: 1.2 !important;
-    margin-bottom: 0.25rem !important; /* Ultra tight spacing */
+    font-size: 0.8125rem !important; /* Readable description */
+    line-height: 1.3 !important;
+    margin-bottom: 0.5rem !important; /* Balanced spacing */
   }
 
   .project-card .flex.flex-wrap {
-    gap: 0.125rem !important; /* Ultra minimal gap between tech tags */
-    margin-bottom: 0.25rem !important; /* Ultra tight spacing */
+    gap: 0.25rem !important; /* Minimal but readable gap */
+    margin-bottom: 0.5rem !important; /* Balanced spacing */
   }
 
   .project-card .flex.flex-wrap span {
-    padding: 0.1rem 0.25rem !important; /* Ultra compact padding */
-    font-size: 0.5rem !important; /* Ultra small tech tag text */
+    padding: 0.1875rem 0.375rem !important; /* Compact but touch-friendly */
+    font-size: 0.6875rem !important; /* Small but readable tech tags */
   }
 
   .project-card .flex.gap-3 {
-    gap: 0.25rem !important; /* Ultra minimal button gap */
+    gap: 0.5rem !important; /* Touch-friendly button gap */
   }
 
   .project-card .flex.gap-3 button {
-    font-size: 0.5rem !important; /* Ultra small button text */
+    font-size: 0.8125rem !important; /* Readable button text */
+    padding: 0.375rem !important; /* Touch-friendly padding */
+    min-height: 40px !important; /* Adequate touch target */
   }
 
   .project-card .flex.gap-3 button svg {
-    width: 0.625rem !important; /* Ultra small icons */
-    height: 0.625rem !important;
+    width: 0.875rem !important; /* Readable icons */
+    height: 0.875rem !important;
   }
 
-  /* Ultra compact arrow icon */
+  /* Compact but usable arrow icon */
   .project-card .p-2.rounded-full {
-    padding: 0.25rem !important; /* Ultra small arrow container */
+    padding: 0.375rem !important; /* Touch-friendly arrow container */
+    min-height: 40px !important; /* Adequate touch target */
+    min-width: 40px !important;
   }
 
   .project-card .p-2.rounded-full svg {
-    width: 0.625rem !important; /* Ultra small arrow icon */
-    height: 0.625rem !important;
+    width: 0.875rem !important; /* Readable arrow icon */
+    height: 0.875rem !important;
+  }
+
+  /* Project image optimization for small screens */
+  .project-card img {
+    height: 7rem !important; /* Slightly smaller for very small screens */
   }
 
   .about-title,
@@ -585,13 +623,103 @@ body {
     font-size: 2rem !important;
   }
 
+  /* Extra small modal optimizations */
+  .modal-mobile {
+    margin: 0.25rem;
+    width: calc(100vw - 0.5rem) !important;
+    max-height: calc(100vh - 0.5rem) !important;
+  }
+
+  .modal-content {
+    padding: 0.75rem !important;
+  }
+
+  .modal-content h2 {
+    font-size: 1.125rem !important; /* 18px */
+  }
+
+  .modal-content h3 {
+    font-size: 0.9375rem !important; /* 15px */
+  }
+
+  .modal-content p {
+    font-size: 0.8125rem !important; /* 13px */
+  }
+
+  .modal-content .flex.flex-wrap span {
+    font-size: 0.6875rem !important; /* 11px */
+    padding: 0.1875rem 0.375rem !important;
+  }
+
+  .modal-content .grid > div span {
+    font-size: 0.75rem !important; /* 12px */
+  }
+
+  .modal-content button {
+    font-size: 0.8125rem !important; /* 13px */
+    padding: 0.625rem 0.875rem !important;
+  }
+
+  .modal-content img {
+    max-height: 35vh !important;
+  }
+
   .modal-mobile {
     margin: 0.5rem;
     width: calc(100vw - 1rem) !important;
+    max-height: calc(100vh - 1rem) !important;
   }
 
   .modal-content {
     padding: 1rem !important;
+  }
+
+  /* Modal text optimizations for mobile */
+  .modal-content h2 {
+    font-size: 1.25rem !important; /* 20px */
+    line-height: 1.2 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .modal-content h3 {
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.3 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .modal-content p {
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Technology tags in modal */
+  .modal-content .flex.flex-wrap span {
+    font-size: 0.75rem !important; /* 12px */
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  /* Key features in modal */
+  .modal-content .grid > div {
+    padding: 0.5rem !important;
+  }
+
+  .modal-content .grid > div span {
+    font-size: 0.8125rem !important; /* 13px */
+    line-height: 1.3 !important;
+  }
+
+  /* Action buttons in modal */
+  .modal-content button {
+    font-size: 0.875rem !important; /* 14px */
+    padding: 0.75rem 1rem !important;
+    min-height: 44px !important;
+  }
+
+  /* Modal image optimization */
+  .modal-content img {
+    max-height: 40vh !important;
+    object-fit: contain !important;
   }
 }
 
@@ -608,7 +736,7 @@ body {
   }
 
   section:first-of-type .container {
-    margin-top: 5vh !important; /* Reduced margin for landscape */
+    margin-top: 3vh !important; /* Further reduced margin for landscape */
   }
 
   .hero-title {

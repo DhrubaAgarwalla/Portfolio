@@ -47,11 +47,24 @@ export interface ConversationContext {
   currentProject?: string;
   userIntent: 'technical' | 'business' | 'career' | 'general' | 'contact';
   previousQuestions: string[];
+  conversationSummary?: string;
+  discussedTopics: string[];
+  currentTopic?: string;
+  followUpContext?: {
+    lastQuestion: string;
+    lastAnswer: string;
+    relatedTopics: string[];
+  };
   userProfile?: {
     isRecruiter?: boolean;
     isDeveloper?: boolean;
     isClient?: boolean;
     interests?: string[];
+  };
+  conversationFlow: {
+    messageCount: number;
+    lastInteractionTime: Date;
+    conversationDepth: 'surface' | 'detailed' | 'deep';
   };
 }
 
@@ -87,7 +100,7 @@ export interface ChatbotState {
   error?: string;
 }
 
-export type QuestionCategory = 
+export type QuestionCategory =
   | 'project_overview'
   | 'technical_details'
   | 'business_impact'

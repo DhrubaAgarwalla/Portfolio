@@ -107,6 +107,99 @@ class KnowledgeBase {
 
   // Detailed Project Information
   public readonly projects: Record<string, ProjectDetails> = {
+    'rakhimart': {
+      name: "RakhiMart - E-commerce Platform",
+      description: "Production-ready e-commerce platform for Rakhi sales with advanced integrations",
+      detailedDescription: "A comprehensive full-stack e-commerce platform built specifically for Rakhi sales, featuring modern React frontend with TypeScript and Supabase backend. The platform includes Cashfree payment integration with UPI support, multi-delivery partner integration (Delhivery, Shiprocket, Blue Dart, DTDC), AI-generated product reviews using Google Generative AI, and a comprehensive admin dashboard. Built with production-grade security, performance optimization, and real-time features for order tracking and inventory management.",
+      linesOfCode: 25000,
+      technologies: [
+        // Frontend Technologies
+        "React 18", "TypeScript", "Tailwind CSS", "Vite", "React Hook Form", "Zod Validation", "React Router DOM", "Embla Carousel", "Recharts", "Next Themes", "shadcn/ui Components", "Lucide React Icons", "Sonner Toasts", "React Query (TanStack)", "Date-fns",
+        // Backend Technologies
+        "Supabase (PostgreSQL)", "Supabase Auth", "Supabase Storage", "Supabase Edge Functions", "Supabase Realtime",
+        // Payment Integration
+        "Cashfree Payment Gateway", "UPI Integration", "Webhook Handling", "HMAC Signature Verification",
+        // Delivery Partners
+        "Delhivery API", "Shiprocket API", "Blue Dart API", "DTDC API", "Shipment Tracking",
+        // Email Services
+        "SendGrid", "Mailgun", "Amazon SES", "Postmark", "Email Templates",
+        // AI Integration
+        "Google Generative AI", "AI Review Generation", "Content Automation",
+        // Deployment & DevOps
+        "Vercel Deployment", "Environment Configuration", "Security Headers", "CORS Configuration"
+      ],
+      features: [
+        // Customer Features
+        "Product catalog with category-wise browsing and filtering",
+        "Shopping cart with quantity management and real-time updates",
+        "Secure checkout with Cashfree payment integration",
+        "UPI payments (Google Pay, PhonePe, Paytm) and card payments",
+        "User authentication and profile management",
+        "Multiple shipping address management",
+        "Wishlist functionality for saving products",
+        "Order tracking with real-time status updates",
+        "Email notifications for order confirmation and shipping",
+        "Responsive design for mobile and desktop",
+        // Admin Features
+        "Comprehensive admin dashboard with analytics",
+        "Product management (add, edit, delete products)",
+        "Order management with status updates",
+        "Inventory management with stock tracking",
+        "Shipping management with delivery partner integration",
+        "Real-time notifications for new orders",
+        "Revenue and sales analytics with charts",
+        "Low stock alerts and inventory reports",
+        "AI-generated product reviews management",
+        "Email template configuration",
+        // Technical Features
+        "Real-time order synchronization using Supabase Realtime",
+        "Atomic stock updates with race condition protection",
+        "Webhook signature verification for security",
+        "Multi-email provider support with fallback",
+        "Automated shipment creation and tracking",
+        "Performance optimization with caching",
+        "Error boundaries and comprehensive error handling",
+        "Type-safe database operations",
+        "Production security hardening"
+      ],
+      highlights: [
+        "Full-stack e-commerce platform with production deployment",
+        "Cashfree payment integration with native UPI support",
+        "Multi-delivery partner integration (4 major Indian logistics providers)",
+        "AI-generated product reviews using Google Generative AI",
+        "Real-time order tracking and inventory management",
+        "Comprehensive admin dashboard with analytics and reporting",
+        "Security hardening with webhook validation and CORS protection",
+        "Multi-email provider support with automated workflows",
+        "Production-ready with performance optimization",
+        "Atomic stock management preventing overselling"
+      ],
+      developmentApproach: "Built using AI-orchestrated development methodology with strategic prompt engineering and iterative refinement. Leveraged AI assistance for complex integrations including payment gateways, delivery partners, and email services. Implemented production-grade security and performance optimizations through AI-guided best practices.",
+      challenges: [
+        "Complex payment gateway integration with webhook handling",
+        "Multi-delivery partner API integration and standardization",
+        "Real-time inventory management with race condition prevention",
+        "Email service integration with multiple provider support",
+        "Production security hardening and performance optimization",
+        "AI review generation with quality control",
+        "Comprehensive admin dashboard with real-time updates"
+      ],
+      solutions: [
+        "Implemented Cashfree payment gateway with secure webhook validation",
+        "Created unified delivery partner interface supporting 4 major providers",
+        "Built atomic stock management system with Supabase transactions",
+        "Developed flexible email service abstraction with provider fallback",
+        "Applied security best practices with CORS, headers, and validation",
+        "Integrated Google Generative AI for automated review generation",
+        "Built real-time admin dashboard using Supabase Realtime subscriptions",
+        "Deployed on Vercel with Supabase backend for scalability"
+      ],
+      impact: "Created a production-ready e-commerce platform demonstrating enterprise-level development capabilities. Showcases expertise in payment integration, logistics APIs, AI integration, and full-stack development with modern technologies.",
+      githubUrl: "https://github.com/DhrubaAgarwalla/RakhiMart",
+      demoUrl: "https://rakhimart.vercel.app/",
+      status: 'completed',
+      developmentTime: "4-5 weeks"
+    },
     'event-manager': {
       name: "Event Manager",
       description: "Comprehensive event management system for NIT Silchar",
@@ -438,6 +531,9 @@ class KnowledgeBase {
     }
 
     // Project-specific queries
+    if (lowerQuery.includes('rakhimart') || lowerQuery.includes('rakhi mart') || lowerQuery.includes('e-commerce') || lowerQuery.includes('ecommerce')) {
+      context += this.getProjectContext('rakhimart');
+    }
     if (lowerQuery.includes('event manager') || lowerQuery.includes('nit silchar')) {
       context += this.getProjectContext('event-manager');
     }

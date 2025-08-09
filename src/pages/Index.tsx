@@ -1,20 +1,24 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
-import { ProjectsSection } from "@/components/ProjectsSection";
-import { ProjectModal } from "@/components/ProjectModal";
 import { ParticleBackground } from "@/components/ParticleBackground";
-import { AboutSection } from "@/components/AboutSection";
-import { TechStack } from "@/components/TechStack";
-import { ContactSection } from "@/components/ContactSection";
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { BottomNavigation } from "@/components/BottomNavigation";
-import Chatbot from "@/components/Chatbot";
 import { AnimatePresence } from "framer-motion";
 import "../styles/mobile.css";
+
+// Lazy load heavy components
+import {
+  LazyProjectsSection,
+  LazyAboutSection,
+  LazyTechStack,
+  LazyContactSection,
+  LazyProjectModal,
+  LazyChatbot
+} from "@/components/LazyComponents";
 
 
 export interface Project {
@@ -30,6 +34,26 @@ export interface Project {
 }
 
 const projects: Project[] = [
+  {
+    id: "rakhimart",
+    title: "RakhiMart - E-commerce Platform",
+    description: "Production-ready e-commerce platform with advanced payment integration and multi-delivery partner support",
+    longDescription: "A comprehensive e-commerce platform built for Rakhi sales featuring Cashfree payment integration, multi-delivery partner support (Delhivery, Shiprocket, Blue Dart, DTDC), and advanced admin dashboard. Built with React, TypeScript, and Supabase, this production-ready platform includes real-time order tracking, inventory management, AI-generated reviews, and automated email workflows. Demonstrates enterprise-level e-commerce development with security hardening and performance optimization.",
+    technologies: ["React", "TypeScript", "Supabase", "Cashfree Payment", "Tailwind CSS", "Google Generative AI", "Recharts", "shadcn/ui"],
+    demoUrl: "https://rakhimart.vercel.app/",
+    githubUrl: "https://github.com/DhrubaAgarwalla/RakhiMart",
+    imageUrl: "/rakhimart.png",
+    highlights: [
+      "Full-stack e-commerce platform with production deployment",
+      "Cashfree payment integration with UPI, cards, and net banking",
+      "Multi-delivery partner integration (Delhivery, Shiprocket, Blue Dart, DTDC)",
+      "AI-generated product reviews using Google Generative AI",
+      "Real-time order tracking and inventory management",
+      "Comprehensive admin dashboard with analytics and shipping management",
+      "Security hardening with webhook validation and CORS protection",
+      "Multi-email provider support (SendGrid, Mailgun, Amazon SES, Postmark)"
+    ]
+  },
   {
     id: "event-manager",
     title: "NIT Silchar Event Manager",
@@ -102,6 +126,13 @@ const Index = () => {
     setShowLoading(false);
   };
 
+  // Fallback component for lazy loading
+  const SectionFallback = () => (
+    <div className="flex items-center justify-center py-20">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyber-blue"></div>
+    </div>
+  );
+
   return (
     <>
       <AnimatePresence>
@@ -131,26 +162,40 @@ const Index = () => {
         <div id="home">
           <Hero />
         </div>
-        <ProjectsSection
-          projects={projects}
-          onProjectClick={setSelectedProject}
-        />
+
+        <Suspense fallback={<SectionFallback />}>
+          <LazyProjectsSection
+            projects={projects}
+            onProjectClick={setSelectedProject}
+          />
+        </Suspense>
+
         <div id="about">
-          <AboutSection />
+          <Suspense fallback={<SectionFallback />}>
+            <LazyAboutSection />
+          </Suspense>
         </div>
+
         <div id="tech">
-          <TechStack />
+          <Suspense fallback={<SectionFallback />}>
+            <LazyTechStack />
+          </Suspense>
         </div>
+
         <div id="contact">
-          <ContactSection />
+          <Suspense fallback={<SectionFallback />}>
+            <LazyContactSection />
+          </Suspense>
         </div>
       </motion.div>
 
-      <ProjectModal
-        project={selectedProject}
-        isOpen={selectedProject !== null}
-        onClose={() => setSelectedProject(null)}
-      />
+      <Suspense fallback={null}>
+        <LazyProjectModal
+          project={selectedProject}
+          isOpen={selectedProject !== null}
+          onClose={() => setSelectedProject(null)}
+        />
+      </Suspense>
 
         <ScrollToTop isProjectModalOpen={selectedProject !== null} />
         <BottomNavigation
@@ -159,7 +204,11 @@ const Index = () => {
         />
 
         {/* AI Chatbot */}
-        {!showLoading && <Chatbot isProjectModalOpen={selectedProject !== null} />}
+        {!showLoading && (
+          <Suspense fallback={null}>
+            <LazyChatbot isProjectModalOpen={selectedProject !== null} />
+          </Suspense>
+        )}
       </div>
     </>
   );

@@ -23,7 +23,7 @@ export const ProjectsSection = ({ projects, onProjectClick }: ProjectsSectionPro
             AI-Orchestrated Projects
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto">
-            Witness the power of AI-driven development: 115,000+ lines of production-ready code
+            Witness the power of AI-driven development: 155,000+ lines of production-ready code
             built through advanced prompt engineering and intelligent collaboration, including this very portfolio
           </p>
         </motion.div>

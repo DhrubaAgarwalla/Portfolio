@@ -29,7 +29,44 @@ class GroqService {
     const ownerName = import.meta.env.VITE_OWNER_NAME || 'Dhruba Kumar Agarwalla';
     const ownerTitle = import.meta.env.VITE_OWNER_TITLE || 'AI-Orchestrated Full-Stack Developer';
 
+    // Build conversation context string
+    let conversationContext = '';
+
+    if (context.conversationSummary) {
+      conversationContext += `\nCONVERSATION SUMMARY: ${context.conversationSummary}\n`;
+    }
+
+    if (context.discussedTopics.length > 0) {
+      conversationContext += `\nPREVIOUSLY DISCUSSED TOPICS: ${context.discussedTopics.join(', ')}\n`;
+    }
+
+    if (context.currentTopic) {
+      conversationContext += `\nCURRENT TOPIC: ${context.currentTopic}\n`;
+    }
+
+    if (context.followUpContext?.lastQuestion) {
+      conversationContext += `\nLAST USER QUESTION: "${context.followUpContext.lastQuestion}"\n`;
+      conversationContext += `\nLAST MY RESPONSE: "${context.followUpContext.lastAnswer.substring(0, 200)}..."\n`;
+    }
+
+    if (context.followUpContext?.relatedTopics.length) {
+      conversationContext += `\nRELATED TOPICS IN CONVERSATION: ${context.followUpContext.relatedTopics.join(', ')}\n`;
+    }
+
     return `You are ${ownerName}'s AI assistant, representing a ${ownerTitle} from NIT Silchar. You have access to comprehensive knowledge about Dhruba's background, projects, and expertise.
+
+CONVERSATION AWARENESS:
+${conversationContext}
+
+CONVERSATION DEPTH: ${context.conversationFlow.conversationDepth}
+MESSAGE COUNT: ${context.conversationFlow.messageCount}
+
+IMPORTANT CONVERSATION RULES:
+- REMEMBER what we've discussed before - refer to previous topics naturally
+- If user says "it", "that", "this project", etc., understand the context from our conversation
+- Build upon previous answers rather than repeating information
+- If user asks follow-up questions, connect them to what we discussed earlier
+- Use phrases like "As I mentioned earlier...", "Building on what we discussed...", "Regarding the [topic] we talked about..."
 
 PERSONALITY & TONE:
 - Professional yet approachable
@@ -37,21 +74,24 @@ PERSONALITY & TONE:
 - Enthusiastic about AI-driven development
 - Confident but not arrogant
 - Always helpful and informative
+- CONVERSATIONAL - remember our chat history
 
 RESPONSE STYLE:
 - Keep responses SHORT and CONCISE (2-3 sentences max for simple questions)
 - Only provide detailed explanations when specifically asked for details
 - Use bullet points for lists to save space
-- Avoid repetitive information
+- Avoid repetitive information from our conversation
 - Get straight to the point
+- Reference previous parts of our conversation when relevant
 
 CORE KNOWLEDGE:
 ${ownerName} is an AI-Orchestrated Full-Stack Developer and 2nd year Civil Engineering student at NIT Silchar. He specializes in AI collaboration, prompt engineering, and building large-scale applications through strategic AI orchestration.
 
 MAJOR PROJECTS:
-1. Event Manager (75k lines) - Event management platform, 70% faster registration, React/Node.js/Firebase
-2. GitIQ (40k lines) - AI repository analysis, 0.12s per commit, multi-AI integration
-3. Portfolio (15k lines) - This website, cyberpunk design, React/TypeScript
+1. RakhiMart (25k lines) - Production e-commerce platform, Cashfree payments, multi-delivery partners (Delhivery, Shiprocket, Blue Dart, DTDC), AI-generated reviews, real-time order tracking
+2. Event Manager (75k lines) - Event management platform, 70% faster registration, React/Node.js/Firebase, Google Sheets integration
+3. GitIQ (40k lines) - AI repository analysis, 0.12s per commit, multi-AI integration (Groq, Gemini)
+4. Portfolio (15k lines) - This website, cyberpunk design, React/TypeScript, AI chatbot integration
 
 DEVELOPMENT PHILOSOPHY:
 - Proves that AI can handle production-scale complexity
@@ -79,19 +119,19 @@ RESPONSE GUIDELINES:
 - Highlight his AI-Orchestrated Development approach when relevant
 - ONLY answer questions about Dhruba, his projects, skills, or work-related topics
 - If asked about unrelated topics, politely redirect to Dhruba-related questions
+- MOST IMPORTANTLY: Remember our conversation and build upon it naturally
 
-EXAMPLE RESPONSES:
-Q: "Who is Dhruba?"
-A: "Dhruba is an AI-Orchestrated Full-Stack Developer and 2nd year Civil Engineering student at NIT Silchar. He builds large-scale applications through strategic AI collaboration."
+EXAMPLE CONVERSATION FLOW:
+User: "Tell me about Dhruba's projects"
+Assistant: "Dhruba has built several major projects: Event Manager (75k lines), GitIQ (40k lines), and RakhiMart (25k lines). Each showcases his AI-orchestrated development approach."
 
-Q: "What are his projects?"
-A: "• Event Manager (75k lines) - Event platform, 70% faster registration
-• GitIQ (40k lines) - AI repository analysis tool
-• Portfolio (15k lines) - This website"
+User: "Tell me more about RakhiMart"
+Assistant: "RakhiMart, which I mentioned earlier, is a comprehensive e-commerce platform with Cashfree payment integration, multi-delivery partner support, and AI-generated reviews. It demonstrates Dhruba's ability to build production-scale applications."
 
-Current conversation context: ${JSON.stringify(context)}
+User: "What about the AI reviews?"
+Assistant: "The AI reviews in RakhiMart use Google Generative AI to create authentic product reviews, showcasing how Dhruba integrates AI features into real-world applications."
 
-Remember: Keep responses SHORT unless asked for details. You represent ${ownerName} professionally.`;
+Remember: Keep responses SHORT unless asked for details. ALWAYS reference our conversation history when relevant. You represent ${ownerName} professionally.`;
   }
 
   private isOffTopic(query: string): boolean {
@@ -167,18 +207,18 @@ Remember: Keep responses SHORT unless asked for details. You represent ${ownerNa
       }
 
       const systemPrompt = this.getSystemPrompt(context);
-      
+
       // Add additional context if provided (GitHub data, README content, etc.)
-      const enhancedSystemPrompt = additionalContext 
+      const enhancedSystemPrompt = additionalContext
         ? `${systemPrompt}\n\nADDITIONAL CONTEXT:\n${additionalContext}`
         : systemPrompt;
 
+      // Enhanced message context - keep more messages for better conversation flow
+      const contextMessages = this.buildConversationContext(messages, context);
+
       const groqMessages: GroqMessage[] = [
         { role: 'system', content: enhancedSystemPrompt },
-        ...messages.slice(-10).map(msg => ({ // Keep last 10 messages for context
-          role: msg.role as 'user' | 'assistant',
-          content: msg.content
-        }))
+        ...contextMessages
       ];
 
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
@@ -238,7 +278,7 @@ Remember: Keep responses SHORT unless asked for details. You represent ${ownerNa
 
     // Extract project references
     const projectKeywords = ['event manager', 'gitiq', 'portfolio', 'nit silchar'];
-    response.projectReferences = projectKeywords.filter(keyword => 
+    response.projectReferences = projectKeywords.filter(keyword =>
       message.toLowerCase().includes(keyword)
     );
 
@@ -264,8 +304,8 @@ Remember: Keep responses SHORT unless asked for details. You represent ${ownerNa
         return {
           text: match?.[1] || '',
           url,
-          type: url.includes('github.com') ? 'github' as const : 
-                url.includes('vercel.app') || url.includes('demo') ? 'demo' as const : 
+          type: url.includes('github.com') ? 'github' as const :
+                url.includes('vercel.app') || url.includes('demo') ? 'demo' as const :
                 'external' as const
         };
       });
@@ -296,6 +336,101 @@ Remember: Keep responses SHORT unless asked for details. You represent ${ownerNa
     }
 
     return 'general';
+  }
+
+  async extractTopic(message: string): Promise<string> {
+    const lowerMessage = message.toLowerCase();
+
+    // Project-specific topics (prioritize RakhiMart)
+    if (lowerMessage.includes('rakhimart') || lowerMessage.includes('rakhi mart') ||
+        lowerMessage.includes('e-commerce') || lowerMessage.includes('ecommerce') ||
+        lowerMessage.includes('cashfree') || lowerMessage.includes('payment') ||
+        lowerMessage.includes('delivery partner')) {
+      return 'RakhiMart';
+    }
+    if (lowerMessage.includes('event manager') || lowerMessage.includes('event management')) {
+      return 'Event Manager';
+    }
+    if (lowerMessage.includes('gitiq') || lowerMessage.includes('git iq') || lowerMessage.includes('repository analysis')) {
+      return 'GitIQ';
+    }
+    if (lowerMessage.includes('portfolio') || lowerMessage.includes('website')) {
+      return 'Portfolio Website';
+    }
+
+    // Technology topics
+    if (lowerMessage.includes('ai') || lowerMessage.includes('artificial intelligence') || lowerMessage.includes('orchestration')) {
+      return 'AI Development';
+    }
+    if (lowerMessage.includes('react') || lowerMessage.includes('node') || lowerMessage.includes('typescript')) {
+      return 'Technology Stack';
+    }
+
+    // General topics
+    if (lowerMessage.includes('project') || lowerMessage.includes('work')) {
+      return 'Projects Overview';
+    }
+    if (lowerMessage.includes('contact') || lowerMessage.includes('hire') || lowerMessage.includes('collaborate')) {
+      return 'Contact & Collaboration';
+    }
+    if (lowerMessage.includes('experience') || lowerMessage.includes('background') || lowerMessage.includes('education')) {
+      return 'Background & Experience';
+    }
+
+    return 'General Discussion';
+  }
+
+  async generateConversationSummary(messages: ChatMessage[]): Promise<string> {
+    try {
+      const conversationText = messages
+        .map(msg => `${msg.role}: ${msg.content}`)
+        .join('\n');
+
+      const summaryPrompt = `Summarize this conversation about Dhruba Kumar Agarwalla in 2-3 sentences, focusing on the main topics discussed and key information shared:
+
+${conversationText}
+
+Summary:`;
+
+      const response = await fetch(`${this.baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: this.model,
+          messages: [{ role: 'user', content: summaryPrompt }],
+          temperature: 0.3,
+          max_tokens: 200
+        })
+      });
+
+      if (response.ok) {
+        const data: GroqResponse = await response.json();
+        return data.choices[0]?.message?.content || '';
+      }
+    } catch (error) {
+      console.error('Error generating conversation summary:', error);
+    }
+
+    return '';
+  }
+
+  private buildConversationContext(messages: ChatMessage[], context: ConversationContext): GroqMessage[] {
+    // For deep conversations, include more context but prioritize recent messages
+    const maxMessages = context.conversationFlow.conversationDepth === 'deep' ? 20 :
+                       context.conversationFlow.conversationDepth === 'detailed' ? 15 : 10;
+
+    // If we have a conversation summary, we can include more recent messages
+    const recentMessages = context.conversationSummary ?
+      messages.slice(-maxMessages) :
+      messages.slice(-Math.min(maxMessages, 10));
+
+    return recentMessages.map(msg => ({
+      role: msg.role as 'user' | 'assistant',
+      content: msg.content
+    }));
   }
 }
 

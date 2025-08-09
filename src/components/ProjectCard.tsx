@@ -13,14 +13,14 @@ export const ProjectCard = ({ project, onClick, index }: ProjectCardProps) => {
   return (
     <motion.div
       whileHover={{
-        y: -15,
-        rotateX: 8,
-        rotateY: index % 2 === 0 ? 8 : -8,
-        scale: 1.02,
+        y: -8,
+        rotateX: 4,
+        rotateY: index % 2 === 0 ? 4 : -4,
+        scale: 1.01,
         z: 50,
       }}
       whileTap={{ scale: 0.98 }}
-      className="glass-card p-4 sm:p-6 md:p-8 cursor-pointer group hover:bg-white/10 transition-all duration-500 relative overflow-hidden h-full flex flex-col"
+      className="glass-card project-card p-4 sm:p-6 md:p-8 cursor-pointer group hover:bg-white/10 transition-all duration-500 relative overflow-hidden h-full flex flex-col"
       style={{
         transformStyle: 'preserve-3d',
         perspective: '1000px'
@@ -32,9 +32,27 @@ export const ProjectCard = ({ project, onClick, index }: ProjectCardProps) => {
         className="absolute inset-0 bg-gradient-to-br from-cyber-blue/10 to-cyber-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         initial={false}
       />
-      
+
       <div className="relative z-10 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-6">
+        {/* Project Image */}
+        <motion.div
+          className="relative mb-4 rounded-lg overflow-hidden bg-gray-800/50"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.3 }}
+        >
+          <img
+            src={project.imageUrl}
+            alt={project.title}
+            className="w-full h-32 sm:h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/placeholder.svg';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </motion.div>
+
+        <div className="flex justify-between items-start mb-4">
           <motion.h3
             className="text-lg sm:text-xl md:text-2xl font-orbitron font-bold text-white group-hover:text-cyber transition-colors duration-300 flex-1 leading-tight"
             whileHover={{ scale: 1.05 }}
@@ -50,7 +68,7 @@ export const ProjectCard = ({ project, onClick, index }: ProjectCardProps) => {
           </motion.div>
         </div>
 
-        <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed flex-1">
+        <p className="text-sm sm:text-base md:text-lg text-gray-300 mb-4 sm:mb-6 leading-relaxed flex-1">
           {project.description}
         </p>
 
@@ -61,13 +79,13 @@ export const ProjectCard = ({ project, onClick, index }: ProjectCardProps) => {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: techIndex * 0.1 }}
-              className="px-2 sm:px-3 py-1 bg-white/10 rounded-full text-xs sm:text-sm text-cyber-blue border border-cyber-blue/30 hover:bg-cyber-blue/20 transition-colors duration-300"
+              className="px-2 sm:px-3 py-1 bg-white/10 rounded-full text-xs sm:text-sm md:text-base text-cyber-blue border border-cyber-blue/30 hover:bg-cyber-blue/20 transition-colors duration-300"
             >
               {tech}
             </motion.span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="px-2 sm:px-3 py-1 bg-white/5 rounded-full text-xs sm:text-sm text-gray-400 border border-gray-600">
+            <span className="px-2 sm:px-3 py-1 bg-white/5 rounded-full text-xs sm:text-sm md:text-base text-gray-400 border border-gray-600">
               +{project.technologies.length - 4} more
             </span>
           )}
@@ -83,7 +101,7 @@ export const ProjectCard = ({ project, onClick, index }: ProjectCardProps) => {
             }}
           >
             <Github className="w-4 h-4" />
-            <span className="text-sm">Code</span>
+            <span className="text-sm md:text-base">Code</span>
           </motion.button>
 
           {project.demoUrl && (
@@ -96,7 +114,7 @@ export const ProjectCard = ({ project, onClick, index }: ProjectCardProps) => {
               }}
             >
               <Link className="w-4 h-4" />
-              <span className="text-sm">Website</span>
+              <span className="text-sm md:text-base">Website</span>
             </motion.button>
           )}
         </div>

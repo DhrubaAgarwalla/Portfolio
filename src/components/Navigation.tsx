@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { Github, Linkedin, Mail, MessageCircle, Download } from "lucide-react";
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -165,6 +165,20 @@ export const Navigation = () => {
                   </motion.a>
                 ))}
               </div>
+
+              {/* Resume Download Button */}
+              <motion.a
+                href="/Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Dhruba_Kumar_Agarwalla_Resume"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden lg:flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-cyber-purple to-cyber-blue rounded-lg text-white font-medium text-sm hover:shadow-lg hover:shadow-cyber-purple/25 transition-all duration-300"
+              >
+                <Download className="w-4 h-4" />
+                <span>Resume</span>
+              </motion.a>
 
               {/* CTA Button */}
               <motion.a

@@ -9,6 +9,23 @@ class ContextService {
   private cacheExpiry = 30 * 60 * 1000; // 30 minutes
 
   private projectsData: Record<string, Partial<ProjectContext>> = {
+    'RakhiMart': {
+      id: 'rakhimart',
+      name: 'RakhiMart - E-commerce Platform',
+      description: '25,000+ lines comprehensive e-commerce platform for Rakhi sales with advanced integrations',
+      technologies: ['React', 'TypeScript', 'Supabase', 'Cashfree', 'Tailwind CSS', 'AI Reviews', 'Multi-Delivery Partners'],
+      lines: 25000,
+      githubUrl: 'https://github.com/DhrubaAgarwalla/RakhiMart',
+      demoUrl: 'https://rakhimart.vercel.app/',
+      highlights: [
+        '25,000+ lines of production-ready e-commerce code',
+        'Cashfree payment integration with UPI support',
+        'Multi-delivery partner support (Delhivery, Shiprocket, Blue Dart, DTDC)',
+        'AI-generated product reviews using Google Generative AI',
+        'Real-time order tracking and inventory management',
+        'Comprehensive admin dashboard with analytics'
+      ]
+    },
     'NITS-Event-Managment': {
       id: 'event-manager',
       name: 'NIT Silchar Event Manager',
@@ -131,7 +148,7 @@ class ContextService {
     }
 
     const response = await githubService.getRepositoryReadme(repoName);
-    
+
     if (response.success && response.data) {
       this.readmeCache.set(repoName, response.data);
     }
@@ -142,32 +159,32 @@ class ContextService {
   async buildContextForQuery(query: string, context: ConversationContext): Promise<string> {
     let contextString = '';
 
+    // Add conversation context for better understanding
+    if (context.conversationSummary) {
+      contextString += `CONVERSATION SUMMARY: ${context.conversationSummary}\n\n`;
+    }
+
+    if (context.discussedTopics.length > 0) {
+      contextString += `PREVIOUSLY DISCUSSED: ${context.discussedTopics.join(', ')}\n\n`;
+    }
+
+    // Check for follow-up context (pronouns, references to previous topics)
+    const isFollowUpQuery = this.detectFollowUpQuery(query, context);
+    if (isFollowUpQuery && context.followUpContext) {
+      contextString += `FOLLOW-UP CONTEXT:\n`;
+      contextString += `Previous Question: "${context.followUpContext.lastQuestion}"\n`;
+      contextString += `Previous Answer: "${context.followUpContext.lastAnswer.substring(0, 300)}..."\n`;
+      contextString += `Related Topics: ${context.followUpContext.relatedTopics.join(', ')}\n\n`;
+    }
+
     // First, get relevant context from knowledge base
     const knowledgeContext = knowledgeBase.searchKnowledge(query);
     if (knowledgeContext) {
       contextString += `KNOWLEDGE BASE CONTEXT:\n${knowledgeContext}\n\n`;
     }
 
-    // Detect if query is about specific project for GitHub data
-    const projectKeywords = {
-      'event manager': 'NITS-Event-Managment',
-      'nit silchar': 'NITS-Event-Managment',
-      'gitiq': 'GitIQ',
-      'git iq': 'GitIQ',
-      'repository insights': 'GitIQ',
-      'portfolio': 'stellar-code-lab',
-      'website': 'stellar-code-lab'
-    };
-
-    const lowerQuery = query.toLowerCase();
-    let relevantProject: string | null = null;
-
-    for (const [keyword, repoName] of Object.entries(projectKeywords)) {
-      if (lowerQuery.includes(keyword)) {
-        relevantProject = repoName;
-        break;
-      }
-    }
+    // Enhanced project detection - consider conversation context
+    let relevantProject = this.detectRelevantProject(query, context);
 
     // If specific project mentioned, get detailed context
     if (relevantProject) {
@@ -183,7 +200,7 @@ class ContextService {
         contextString += `- Lines of Code: ${project.lines.toLocaleString()}\n`;
         contextString += `- GitHub: ${project.githubUrl}\n`;
         if (project.demoUrl) contextString += `- Demo: ${project.demoUrl}\n`;
-        
+
         if (project.stats) {
           contextString += `- GitHub Stats: ${project.stats.stars} stars, ${project.stats.forks} forks, ${project.stats.commits} commits\n`;
           contextString += `- Languages: ${Object.keys(project.stats.languages).join(', ')}\n`;
@@ -210,6 +227,62 @@ class ContextService {
     }
 
     return contextString;
+  }
+
+  private detectFollowUpQuery(query: string, context: ConversationContext): boolean {
+    const lowerQuery = query.toLowerCase();
+
+    // Check for pronouns and references
+    const followUpIndicators = [
+      'it', 'that', 'this', 'them', 'those', 'these',
+      'the project', 'the platform', 'the website', 'the application',
+      'more about', 'tell me more', 'what about', 'how about',
+      'also', 'additionally', 'furthermore', 'and what',
+      'can you explain', 'elaborate', 'details'
+    ];
+
+    return followUpIndicators.some(indicator => lowerQuery.includes(indicator)) ||
+           (query.length < 20 && context.discussedTopics.length > 0);
+  }
+
+  private detectRelevantProject(query: string, context: ConversationContext): string | null {
+    const projectKeywords = {
+      'rakhimart': 'RakhiMart',
+      'rakhi mart': 'RakhiMart',
+      'e-commerce': 'RakhiMart',
+      'ecommerce': 'RakhiMart',
+      'cashfree': 'RakhiMart',
+      'payment': 'RakhiMart',
+      'delivery': 'RakhiMart',
+      'event manager': 'NITS-Event-Managment',
+      'nit silchar': 'NITS-Event-Managment',
+      'gitiq': 'GitIQ',
+      'git iq': 'GitIQ',
+      'repository insights': 'GitIQ',
+      'portfolio': 'stellar-code-lab',
+      'website': 'stellar-code-lab'
+    };
+
+    const lowerQuery = query.toLowerCase();
+
+    // Direct keyword match
+    for (const [keyword, repoName] of Object.entries(projectKeywords)) {
+      if (lowerQuery.includes(keyword)) {
+        return repoName;
+      }
+    }
+
+    // Context-based detection for follow-up queries
+    if (this.detectFollowUpQuery(query, context) && context.currentTopic) {
+      const currentTopic = context.currentTopic.toLowerCase();
+
+      if (currentTopic.includes('rakhimart') || currentTopic.includes('e-commerce')) return 'RakhiMart';
+      if (currentTopic.includes('event')) return 'NITS-Event-Managment';
+      if (currentTopic.includes('gitiq')) return 'GitIQ';
+      if (currentTopic.includes('portfolio')) return 'stellar-code-lab';
+    }
+
+    return null;
   }
 
   private getRepoNameFromId(projectId: string): string {
