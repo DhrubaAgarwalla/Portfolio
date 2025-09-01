@@ -44,7 +44,7 @@ export const Hero = () => {
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-1 sm:gap-2 md:gap-4 text-center">
               <div className="glass-card p-1.5 sm:p-2 md:p-3">
-                <div className="text-cyber-blue font-bold text-xs sm:text-sm md:text-lg">140K+</div>
+                <div className="text-cyber-blue font-bold text-xs sm:text-sm md:text-lg">155K+</div>
                 <div className="text-xs text-gray-400">Lines</div>
               </div>
               <div className="glass-card p-1.5 sm:p-2 md:p-3">

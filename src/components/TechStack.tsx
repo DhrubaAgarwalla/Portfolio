@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
-import { Code, Database, Cloud, Cpu, Palette, Zap } from "lucide-react";
+import { useState } from "react";
+import { Code, Database, Cloud, Cpu, Palette, Zap, ChevronDown, ChevronUp } from "lucide-react";
 
 export const TechStack = () => {
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(0);
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategory(expandedCategory === index ? null : index);
+  };
   const categories = [
     {
       title: "AI-Assisted Frontend Development",
@@ -21,6 +27,7 @@ export const TechStack = () => {
       color: "cyber-green",
       technologies: [
         { name: "Node.js", level: "Advanced", description: "AI-orchestrated server-side development" },
+        { name: "Supabase", level: "Advanced", description: "Real-time database & authentication" },
         { name: "Firebase", level: "Advanced", description: "AI-assisted real-time database & auth" },
         { name: "Google Sheets API", level: "Intermediate", description: "AI-guided data integration" },
         { name: "GitHub API", level: "Intermediate", description: "AI-powered repository analysis" },
@@ -40,37 +47,39 @@ export const TechStack = () => {
       ]
     },
     {
-      title: "Tools & Platforms",
+      title: "Payment & E-commerce",
       icon: <Cloud className="w-6 h-6" />,
       color: "cyber-yellow",
+      technologies: [
+        { name: "Cashfree Payment", level: "Advanced", description: "UPI, cards & net banking integration" },
+        { name: "Delivery APIs", level: "Advanced", description: "Delhivery, Shiprocket, Blue Dart, DTDC" },
+        { name: "Google Generative AI", level: "Advanced", description: "AI-generated product reviews" },
+        { name: "Webhook Integration", level: "Intermediate", description: "Real-time order processing" },
+        { name: "CORS & Security", level: "Advanced", description: "Production-ready security" }
+      ]
+    },
+    {
+      title: "Tools & Platforms", 
+      icon: <Cloud className="w-6 h-6" />,
+      color: "cyber-cyan",
       technologies: [
         { name: "Vercel", level: "Advanced", description: "Deployment & hosting" },
         { name: "Cloudinary", level: "Intermediate", description: "Media management" },
         { name: "VS Code + AI", level: "Expert", description: "AI-enhanced development" },
         { name: "Git & GitHub", level: "Advanced", description: "Version control" },
-        { name: "Recharts", level: "Intermediate", description: "Data visualization" }
+        { name: "Recharts", level: "Intermediate", description: "Data visualization" },
+        { name: "shadcn/ui", level: "Advanced", description: "Component library" }
       ]
     },
     {
-      title: "Development Approach",
-      icon: <Zap className="w-6 h-6" />,
-      color: "cyber-pink",
-      technologies: [
-        { name: "AI-Driven Architecture", level: "Expert", description: "System design through AI" },
-        { name: "Rapid Prototyping", level: "Advanced", description: "Fast iteration cycles" },
-        { name: "Error Prevention", level: "Advanced", description: "Proactive debugging" },
-        { name: "Resource Optimization", level: "Expert", description: "Maximum impact, zero cost" },
-        { name: "Continuous Learning", level: "Expert", description: "Adapting to new technologies" }
-      ]
-    },
-    {
-      title: "Specialized Skills",
+      title: "E-commerce & Automation",
       icon: <Code className="w-6 h-6" />,
-      color: "cyber-orange",
+      color: "cyber-orange", 
       technologies: [
         { name: "QR Code Systems", level: "Advanced", description: "Attendance tracking" },
-        { name: "Email Automation", level: "Intermediate", description: "Gmail API integration" },
-        { name: "Data Pipelines", level: "Intermediate", description: "Real-time processing" },
+        { name: "Email Automation", level: "Advanced", description: "Multi-provider email integration" },
+        { name: "Inventory Management", level: "Advanced", description: "Real-time stock tracking" },
+        { name: "Order Processing", level: "Advanced", description: "Automated fulfillment pipelines" },
         { name: "Role-Based Access", level: "Advanced", description: "Security implementation" },
         { name: "Performance Optimization", level: "Intermediate", description: "Speed & efficiency" }
       ]
@@ -96,26 +105,83 @@ export const TechStack = () => {
   };
 
   return (
-    <section className="py-8 sm:py-12 md:py-20 relative">
-      <div className="container mx-auto px-6">
+    <section id="tech" className="py-8 sm:py-12 md:py-20 relative">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-orbitron font-bold mb-6 text-cyber">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-orbitron font-bold mb-4 md:mb-6 text-cyber">
             Technology Arsenal
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A comprehensive toolkit mastered through AI collaboration and strategic learning
+          <p className="text-sm sm:text-base md:text-xl text-gray-300 max-w-3xl mx-auto">
+            A comprehensive toolkit mastered through AI collaboration
           </p>
         </motion.div>
 
-        {/* Tech Categories Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 tech-grid">
+        {/* Mobile: Accordion Style */}
+        <div className="block md:hidden space-y-3">
+          {categories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              className="glass-card overflow-hidden"
+            >
+              {/* Accordion Header */}
+              <button
+                onClick={() => toggleCategory(categoryIndex)}
+                className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-full bg-${category.color}/20 text-${category.color}`}>
+                    {category.icon}
+                  </div>
+                  <h3 className="text-sm font-orbitron font-bold text-white text-left">
+                    {category.title}
+                  </h3>
+                </div>
+                <motion.div
+                  animate={{ rotate: expandedCategory === categoryIndex ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-5 h-5 text-gray-400" />
+                </motion.div>
+              </button>
+
+              {/* Accordion Content */}
+              <motion.div
+                initial={false}
+                animate={{
+                  height: expandedCategory === categoryIndex ? "auto" : 0,
+                  opacity: expandedCategory === categoryIndex ? 1 : 0
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="px-4 pb-4 space-y-2">
+                  {category.technologies.map((tech, techIndex) => (
+                    <div key={tech.name} className="flex items-center justify-between py-1">
+                      <span className="text-sm text-white">{tech.name}</span>
+                      <span className={`text-xs ${getLevelColor(tech.level)}`}>
+                        {tech.level}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop: Full Grid */}
+        <div className="hidden md:grid lg:grid-cols-2 gap-8 tech-grid">
           {categories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}

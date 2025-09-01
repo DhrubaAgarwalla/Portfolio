@@ -87,7 +87,7 @@ RESPONSE STYLE:
 CORE KNOWLEDGE:
 ${ownerName} is an AI-Orchestrated Full-Stack Developer and 2nd year Civil Engineering student at NIT Silchar. He specializes in AI collaboration, prompt engineering, and building large-scale applications through strategic AI orchestration.
 
-MAJOR PROJECTS:
+MAJOR PROJECTS (155,000+ total lines):
 1. RakhiMart (25k lines) - Production e-commerce platform, Cashfree payments, multi-delivery partners (Delhivery, Shiprocket, Blue Dart, DTDC), AI-generated reviews, real-time order tracking
 2. Event Manager (75k lines) - Event management platform, 70% faster registration, React/Node.js/Firebase, Google Sheets integration
 3. GitIQ (40k lines) - AI repository analysis, 0.12s per commit, multi-AI integration (Groq, Gemini)
