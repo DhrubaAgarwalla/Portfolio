@@ -35,7 +35,7 @@ A revolutionary portfolio showcasing the future of AI-driven development through
 |----------|-------------|
 | **Frontend** | React 18, TypeScript, Tailwind CSS, Framer Motion |
 | **Build Tools** | Vite, PostCSS, Autoprefixer |
-| **AI Integration** | Groq AI (llama3-8b-8192), GitHub API |
+| **AI Integration** | Groq AI (llama-3.3-70b-versatile), GitHub API |
 | **Styling** | Cyberpunk theme, Glassmorphism, 3D effects |
 | **Deployment** | Vercel, Environment Variables |
 | **Development** | ESLint, TypeScript, Hot Reload |

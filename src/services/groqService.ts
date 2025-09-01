@@ -23,7 +23,7 @@ interface GroqResponse {
 class GroqService {
   private apiKey = import.meta.env.VITE_GROQ_API_KEY;
   private baseUrl = 'https://api.groq.com/openai/v1';
-  private model = import.meta.env.VITE_CHATBOT_MODEL || 'llama3-8b-8192'; // Fast and efficient model with 8K context
+  private model = import.meta.env.VITE_CHATBOT_MODEL || 'llama-3.3-70b-versatile'; // Fast and efficient model with 8K+ context, default updated from deprecated llama3-8k
 
   private getSystemPrompt(context: ConversationContext): string {
     const ownerName = import.meta.env.VITE_OWNER_NAME || 'Dhruba Kumar Agarwalla';

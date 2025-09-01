@@ -31,7 +31,7 @@ VITE_GITHUB_TOKEN=your_github_personal_access_token_here
 
 ### 4. Configuration
 The chatbot is pre-configured with:
-- **Model**: `llama3-8b-8192` (fast and efficient with 8K context window)
+- **Model**: `llama-3.3-70b-versatile` (fast and efficient with 8K context window)
 - **Temperature**: 0.7 (balanced creativity/accuracy)
 - **Context**: Full project knowledge from READMEs
 - **GitHub Integration**: Live repository statistics

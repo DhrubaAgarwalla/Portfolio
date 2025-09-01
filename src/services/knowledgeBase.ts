@@ -347,7 +347,7 @@ class KnowledgeBase {
       description: "Advanced portfolio website with AI chatbot integration",
       detailedDescription: "A modern, responsive portfolio website showcasing projects and skills, featuring an advanced AI chatbot powered by Groq AI for interactive user engagement. Built with cyberpunk aesthetic, 3D effects, and comprehensive project showcases.",
       linesOfCode: 15000,
-      technologies: ["React 18", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Groq AI (llama3-8b-8192)", "GitHub API", "shadcn/ui", "Radix UI", "React Router DOM", "Recharts", "Zod", "React Query", "Vercel"],
+      technologies: ["React 18", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Groq AI (llama-3.3-70b-versatile)", "GitHub API", "shadcn/ui", "Radix UI", "React Router DOM", "Recharts", "Zod", "React Query", "Vercel"],
       features: [
         "Interactive AI chatbot with Groq AI integration",
         "Conversation persistence with localStorage (24-hour expiry)",
