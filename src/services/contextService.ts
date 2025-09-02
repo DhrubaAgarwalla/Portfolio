@@ -9,6 +9,24 @@ class ContextService {
   private cacheExpiry = 30 * 60 * 1000; // 30 minutes
 
   private projectsData: Record<string, Partial<ProjectContext>> = {
+    'JW GOLD': {
+      id: 'JW GOLD',
+      name: 'JW GOLD - Jewelry Catalog Platform',
+      description: '25,000+ lines enterprise B2B jewelry catalog platform for resellers with advanced user management',
+      technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Cloudinary', 'WhatsApp Integration', 'Telegram Bot API', 'jsPDF', 'JWT Authentication'],
+      lines: 25000,
+      demoUrl: 'https://jwgold.in',
+      highlights: [
+        '25,000+ lines of enterprise B2B platform code',
+        'Custom authentication with manual approval workflow and role-based access',
+        'Advanced product management with category system and multiple image support',
+        'Automated account deactivation policies with custom purchase requirements',
+        'WhatsApp integration for seamless order processing and communication',
+        'PDF invoice generation with product links and comprehensive order details',
+        'Telegram bot notifications for admin alerts and order management',
+        'Built with latest Next.js 15 and React 19 for optimal performance'
+      ]
+    },
     'RakhiMart': {
       id: 'rakhimart',
       name: 'RakhiMart - E-commerce Platform',
@@ -247,6 +265,16 @@ class ContextService {
 
   private detectRelevantProject(query: string, context: ConversationContext): string | null {
     const projectKeywords = {
+      'jw gold': 'jw-retail-final',
+      'jw-gold': 'jw-retail-final',
+      'jewelry': 'jw-retail-final',
+      'jewellery': 'jw-retail-final',
+      'catalog': 'jw-retail-final',
+      'catalogue': 'jw-retail-final',
+      'b2b': 'jw-retail-final',
+      'reseller': 'jw-retail-final',
+      'whatsapp': 'jw-retail-final',
+      'telegram': 'jw-retail-final',
       'rakhimart': 'RakhiMart',
       'rakhi mart': 'RakhiMart',
       'e-commerce': 'RakhiMart',
@@ -276,6 +304,7 @@ class ContextService {
     if (this.detectFollowUpQuery(query, context) && context.currentTopic) {
       const currentTopic = context.currentTopic.toLowerCase();
 
+      if (currentTopic.includes('jw gold') || currentTopic.includes('jewelry') || currentTopic.includes('b2b')) return 'jw-retail-final';
       if (currentTopic.includes('rakhimart') || currentTopic.includes('e-commerce')) return 'RakhiMart';
       if (currentTopic.includes('event')) return 'NITS-Event-Managment';
       if (currentTopic.includes('gitiq')) return 'GitIQ';

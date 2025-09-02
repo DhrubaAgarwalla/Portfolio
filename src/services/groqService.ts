@@ -87,11 +87,12 @@ RESPONSE STYLE:
 CORE KNOWLEDGE:
 ${ownerName} is an AI-Orchestrated Full-Stack Developer and 2nd year Civil Engineering student at NIT Silchar. He specializes in AI collaboration, prompt engineering, and building large-scale applications through strategic AI orchestration.
 
-MAJOR PROJECTS (155,000+ total lines):
-1. RakhiMart (25k lines) - Production e-commerce platform, Cashfree payments, multi-delivery partners (Delhivery, Shiprocket, Blue Dart, DTDC), AI-generated reviews, real-time order tracking
+MAJOR PROJECTS (180,000+ total lines):
+1. JW GOLD (25k lines) - Enterprise B2B jewelry catalog platform, Next.js 15/React 19, custom authentication with manual approval, WhatsApp integration, Telegram notifications, PDF invoices, automated deactivation policies
 2. Event Manager (75k lines) - Event management platform, 70% faster registration, React/Node.js/Firebase, Google Sheets integration
 3. GitIQ (40k lines) - AI repository analysis, 0.12s per commit, multi-AI integration (Groq, Gemini)
-4. Portfolio (15k lines) - This website, cyberpunk design, React/TypeScript, AI chatbot integration
+4. RakhiMart (25k lines) - Production e-commerce platform, Cashfree payments, multi-delivery partners (Delhivery, Shiprocket, Blue Dart, DTDC), AI-generated reviews, real-time order tracking
+5. Portfolio (15k lines) - This website, cyberpunk design, React/TypeScript, AI chatbot integration
 
 DEVELOPMENT PHILOSOPHY:
 - Proves that AI can handle production-scale complexity
@@ -139,12 +140,14 @@ Remember: Keep responses SHORT unless asked for details. ALWAYS reference our co
 
     // Topics related to Dhruba and his work
     const relevantKeywords = [
-      'dhruba', 'project', 'event manager', 'gitiq', 'portfolio', 'website',
+      'dhruba', 'project', 'jw gold', 'jw-gold', 'jewelry', 'catalog', 'b2b', 'reseller',
+      'event manager', 'gitiq', 'portfolio', 'website', 'rakhimart',
       'ai', 'development', 'developer', 'programming', 'code', 'technology',
       'nit silchar', 'civil engineering', 'student', 'experience', 'skill',
       'hire', 'contact', 'email', 'phone', 'collaboration', 'work',
       'react', 'node', 'typescript', 'javascript', 'firebase', 'github',
-      'orchestration', 'prompt engineering', 'full stack', 'web development'
+      'orchestration', 'prompt engineering', 'full stack', 'web development',
+      'whatsapp', 'telegram', 'supabase', 'next.js', 'cloudinary'
     ];
 
     // Check if query contains any relevant keywords
@@ -341,7 +344,14 @@ Remember: Keep responses SHORT unless asked for details. ALWAYS reference our co
   async extractTopic(message: string): Promise<string> {
     const lowerMessage = message.toLowerCase();
 
-    // Project-specific topics (prioritize RakhiMart)
+    // Project-specific topics (prioritize JW GOLD)
+    if (lowerMessage.includes('jw gold') || lowerMessage.includes('jw-gold') ||
+        lowerMessage.includes('jewelry') || lowerMessage.includes('jewellery') ||
+        lowerMessage.includes('catalog') || lowerMessage.includes('catalogue') ||
+        lowerMessage.includes('b2b') || lowerMessage.includes('reseller') ||
+        lowerMessage.includes('whatsapp') || lowerMessage.includes('telegram')) {
+      return 'JW GOLD';
+    }
     if (lowerMessage.includes('rakhimart') || lowerMessage.includes('rakhi mart') ||
         lowerMessage.includes('e-commerce') || lowerMessage.includes('ecommerce') ||
         lowerMessage.includes('cashfree') || lowerMessage.includes('payment') ||

@@ -97,7 +97,8 @@ class KnowledgeBase {
     philosophy: "Creating large-scale, production-ready applications through strategic AI collaboration and prompt engineering, without traditional coding knowledge. Combining AI/ML with web development to build exceptional user experiences.",
     achievements: [
       "2nd Prize Winner in CSS Hacks Hackathon",
-      "Built 155,000+ total lines across all projects through AI orchestration",
+      "Built 180,000+ total lines across all projects through AI orchestration",
+      "JW GOLD (25,000+ lines) - enterprise B2B jewelry catalog platform",
       "Event Manager (75,000+ lines) - enterprise event management platform",
       "GitIQ (40,000+ lines) - AI-powered repository analysis tool",
       "Created advanced portfolio with AI chatbot integration",
@@ -108,6 +109,98 @@ class KnowledgeBase {
 
   // Detailed Project Information
   public readonly projects: Record<string, ProjectDetails> = {
+    'jw-gold': {
+      name: "JW GOLD - Jewelry Catalog Platform",
+      description: "Enterprise-grade B2B jewelry catalog platform for resellers with advanced user management",
+      detailedDescription: "A sophisticated B2B jewelry catalog platform designed specifically for resellers, featuring comprehensive user management with manual approval workflows, advanced product catalog with category management, and integrated WhatsApp order processing. Built with Next.js 15 and React 19, this enterprise-level application includes automated account deactivation policies, Telegram notifications, PDF invoice generation, and Cloudinary image management. Demonstrates advanced authentication systems, role-based access control, and automated business logic implementation.",
+      linesOfCode: 25000,
+      technologies: [
+        // Frontend Technologies
+        "Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "React Hook Form", "Zod Validation", "Lucide React Icons", "SWR", "React Easy Crop", "HTML2Canvas",
+        // Backend & Database
+        "Supabase", "PostgreSQL", "Supabase Auth", "Supabase Storage", "Row Level Security (RLS)", "Database Functions", "JWT Authentication", "bcryptjs",
+        // Integrations & Services
+        "Cloudinary", "WhatsApp Integration", "Telegram Bot API", "jsPDF", "PDF Generation", "Image Upload & Processing",
+        // Development & Deployment
+        "ESLint", "PostCSS", "Vercel Deployment", "Environment Configuration"
+      ],
+      features: [
+        // Authentication & User Management
+        "Custom authentication system with manual approval workflow",
+        "Role-based access control (Admin, Staff, Reseller)",
+        "User registration with approval/rejection system",
+        "Password reset functionality with secure token system",
+        "Account deactivation policies with custom purchase requirements",
+        "Staff management with special privileges",
+        "User profile management with company details",
+        // Product & Catalog Management
+        "Advanced product catalog with category system",
+        "Multiple product images with Cloudinary integration",
+        "Product variations and minimum order quantities",
+        "Category management with image support",
+        "Product search and filtering capabilities",
+        "Inventory management and stock tracking",
+        "Product pinning for featured items",
+        // Order Processing & Communication
+        "Shopping cart functionality with persistent storage",
+        "WhatsApp integration for order processing",
+        "PDF invoice generation with product links",
+        "Order management dashboard for admins",
+        "Customer profiles and purchase history",
+        // Admin Features
+        "Comprehensive admin dashboard with analytics",
+        "User approval/rejection management",
+        "Order management and tracking",
+        "Announcement system for important updates",
+        "Password reset request management",
+        "Automated account deactivation system",
+        // Notifications & Automation
+        "Telegram bot notifications for admin alerts",
+        "Automated deactivation notifications",
+        "Order confirmation and status updates",
+        "Registration approval notifications",
+        "Password reset notifications"
+      ],
+      highlights: [
+        "Enterprise B2B jewelry catalog platform for resellers",
+        "Custom authentication with manual approval workflow and role-based access",
+        "Advanced product management with category system and multiple image support",
+        "Automated account deactivation policies with custom purchase requirements",
+        "WhatsApp integration for seamless order processing and communication",
+        "PDF invoice generation with product links and comprehensive order details",
+        "Telegram bot notifications for admin alerts and order management",
+        "Cloudinary integration for optimized image uploads and management",
+        "Comprehensive admin dashboard with user, product, and order management",
+        "Built with latest Next.js 15 and React 19 for optimal performance",
+        "Production-ready with security hardening and performance optimization",
+        "Scalable architecture supporting multiple resellers and high transaction volume"
+      ],
+      developmentApproach: "Built using AI-orchestrated development methodology with strategic prompt engineering and Next.js 15 best practices. Leveraged AI assistance for complex business logic implementation including automated deactivation policies, role-based access control, and multi-service integrations. Implemented enterprise-grade security and scalability through AI-guided architecture decisions.",
+      challenges: [
+        "Complex user approval workflow with role-based access control",
+        "Automated account deactivation with custom business rules",
+        "Multi-service integration (Cloudinary, WhatsApp, Telegram)",
+        "PDF generation with dynamic product information",
+        "Scalable product catalog with advanced filtering",
+        "Real-time notifications and admin alerts",
+        "Security implementation with JWT and database-level policies",
+        "Image upload and processing with optimization"
+      ],
+      solutions: [
+        "Implemented custom authentication system with Supabase and manual approval workflow",
+        "Created automated deactivation system using database functions and triggers",
+        "Built unified service architecture for WhatsApp, Telegram, and Cloudinary integration",
+        "Developed dynamic PDF generation system with jsPDF and product linking",
+        "Designed scalable product catalog with efficient search and filtering",
+        "Implemented real-time notification system using Telegram Bot API",
+        "Applied enterprise security with Row Level Security and JWT authentication",
+        "Optimized image handling with Cloudinary and React Easy Crop integration"
+      ],
+      impact: "Created a comprehensive B2B platform demonstrating enterprise-level development capabilities in jewelry retail domain. Showcases expertise in complex business logic implementation, multi-service integration, and scalable architecture design for specialized industry requirements.",
+      demoUrl: "https://jwgold.in",
+      status: 'completed',
+      developmentTime: "6-8 weeks"
+    },
     'rakhimart': {
       name: "RakhiMart - E-commerce Platform",
       description: "Production-ready e-commerce platform for Rakhi sales with advanced integrations",
@@ -457,9 +550,10 @@ class KnowledgeBase {
       "AI-powered debugging and optimization"
     ],
     examples: [
-      "Total 155,000+ lines across all projects through AI orchestration",
+      "Total 180,000+ lines across all projects through AI orchestration",
       "Event Manager: 75,000+ lines - enterprise event management platform",
       "GitIQ: 40,000+ lines - AI-powered repository analysis tool",
+      "JW GOLD: 25,000+ lines - enterprise B2B jewelry catalog platform",
       "Multiple automation systems created in days rather than months",
       "Portfolio website with advanced AI chatbot integration"
     ]
@@ -505,6 +599,7 @@ class KnowledgeBase {
       "Primary AI development tool for all major projects",
       "Used for Event Manager (75,000+ lines) development",
       "Essential for GitIQ (40,000+ lines) creation",
+      "Key tool in JW GOLD (25,000+ lines) B2B platform development",
       "Key tool in portfolio website development",
       "Enables rapid prototyping and complex system architecture",
       "Facilitates learning new technologies and frameworks",
@@ -541,6 +636,9 @@ class KnowledgeBase {
     }
     if (lowerQuery.includes('gitiq') || lowerQuery.includes('git iq') || lowerQuery.includes('repository')) {
       context += this.getProjectContext('gitiq');
+    }
+    if (lowerQuery.includes('jw gold') || lowerQuery.includes('jw-gold') || lowerQuery.includes('jewelry') || lowerQuery.includes('b2b')) {
+      context += this.getProjectContext('jw-gold');
     }
     if (lowerQuery.includes('portfolio') || lowerQuery.includes('website')) {
       context += this.getProjectContext('portfolio');

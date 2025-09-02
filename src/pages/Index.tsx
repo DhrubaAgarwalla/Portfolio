@@ -35,6 +35,27 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    id: "JW GOLD",
+    title: "JW GOLD - Jewelry Catalog Platform",
+    description: "Enterprise-grade jewelry catalog platform for resellers with advanced user management and automated workflows",
+    longDescription: "A sophisticated B2B jewelry catalog platform designed specifically for resellers, featuring comprehensive user management with manual approval workflows, advanced product catalog with category management, and integrated WhatsApp order processing. Built with Next.js 15 and React 19, this enterprise-level application includes automated account deactivation policies, Telegram notifications, PDF invoice generation, and Cloudinary image management. Demonstrates advanced authentication systems, role-based access control, and automated business logic implementation.",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Tailwind CSS", "Cloudinary", "jsPDF", "Telegram Bot API", "WhatsApp Integration", "JWT Authentication"],
+    demoUrl: "https://jwgold.in",
+    imageUrl: "\jwgold.png",
+    highlights: [
+      "Enterprise B2B jewelry catalog platform for resellers",
+      "Custom authentication with manual approval workflow and role-based access",
+      "Advanced product management with category system and multiple image support",
+      "Automated account deactivation policies with custom purchase requirements",
+      "WhatsApp integration for seamless order processing and communication",
+      "PDF invoice generation with product links and comprehensive order details",
+      "Telegram bot notifications for admin alerts and order management",
+      "Cloudinary integration for optimized image uploads and management",
+      "Comprehensive admin dashboard with user, product, and order management",
+      "Built with latest Next.js 15 and React 19 for optimal performance"
+    ]
+  },
+  {
     id: "rakhimart",
     title: "RakhiMart - E-commerce Platform",
     description: "Production-ready e-commerce platform with advanced payment integration and multi-delivery partner support",
